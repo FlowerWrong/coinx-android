@@ -105,7 +105,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingTop="2dp"
-                        android:text="@string/strUpgradeDialogFeatureLabel"
+                        android:text="strUpgradeDialogFeatureLabel"
                         android:textColor="#273238"
                         android:textSize="14sp" />
 
