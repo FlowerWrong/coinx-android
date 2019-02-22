@@ -50,7 +50,6 @@ public class CommonParamsInterceptor implements Interceptor {
      * @param requestBuilder 重构
      */
     private void rebuildHeader(Request oldRequest, Request.Builder requestBuilder) {
-
         if (oldRequest == null) {
             return;
         }

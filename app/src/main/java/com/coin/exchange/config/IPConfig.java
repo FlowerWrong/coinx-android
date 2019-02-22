@@ -27,14 +27,13 @@ public class IPConfig {
     public static String OK_EX_WS_IP;
 
     static {
+        BIT_MEX_IP_MAP.add("www.bitmex.com");
 
-        BIT_MEX_IP_MAP.add("52.51.111.111");
+        BIT_MEX_TEST_IP_MAP.add("testnet.bitmex.com");
 
-        BIT_MEX_TEST_IP_MAP.add("54.246.160.60");
+        OK_EX_IP_MAP.add("www.okex.com");
 
-        OK_EX_IP_MAP.add("104.19.212.87");
-
-        OK_EX_WS_IP_MAP.add("149.129.81.70");
+        OK_EX_WS_IP_MAP.add("real.okex.com");
 
         OK_EX_IP = OK_EX_IP_MAP.get(RANDOM.nextInt(OK_EX_IP_MAP.size()));
 
@@ -46,7 +45,6 @@ public class IPConfig {
     }
 
     public static String getBitMexIp(boolean isDebug) {
-
         if (isDebug) {
             return BIT_MEX_TEST_IP;
         } else {
@@ -61,16 +59,6 @@ public class IPConfig {
 
     public static String getOkExWsIp() {
         return OK_EX_WS_IP;
-    }
-
-    public static void main(String[] args) {
-        for (int i = 0; i < 100; ++i) {
-            System.out.println(getBitMexIp(false));
-            System.out.println(getBitMexIp(true));
-            System.out.println(getOkExIp());
-            System.out.println(getOkExWsIp());
-            System.out.println("================");
-        }
     }
 
 }

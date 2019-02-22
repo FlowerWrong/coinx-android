@@ -1,6 +1,5 @@
 package com.coin.special.proxy;
 
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.coin.exchange.config.NetConfig;
@@ -18,9 +17,7 @@ import java.net.SocketException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.net.ssl.SSLSocketFactory;
 
@@ -69,7 +66,6 @@ public class SockInThread implements Runnable {
 
     @Override
     public void run() {
-
         try {
 
             //与客户端的输入流

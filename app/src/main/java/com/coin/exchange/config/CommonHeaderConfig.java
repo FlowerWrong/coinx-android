@@ -46,7 +46,7 @@ public class CommonHeaderConfig {
         if (TextUtils.isEmpty(request.url().query())) {
             requestPath = request.url().encodedPath();
         } else {
-            requestPath = request.url().encodedPath() + "?" + request.url().encodedQuery().toString();
+            requestPath = request.url().encodedPath() + "?" + request.url().encodedQuery();
         }
 
         String sign = SignUtils.getBitMexSign(BitMexUserCache.getDefault().getSecretKey(),
@@ -84,7 +84,7 @@ public class CommonHeaderConfig {
         if (TextUtils.isEmpty(request.url().query())) {
             requestPath = request.url().encodedPath();
         } else {
-            requestPath = request.url().encodedPath() + "?" + request.url().query().toString();
+            requestPath = request.url().encodedPath() + "?" + request.url().query();
         }
         String sign = SignUtils.getOkExSign(OkExUserCache.getDefault().getSecretKey(),
                 request.method(),
