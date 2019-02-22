@@ -71,16 +71,6 @@
         <activity
             android:name=".view.AboutActivity"
             android:screenOrientation="portrait" />
-
-        <!-- 获取代理进程数据 -->
-        <!--<service-->
-        <!--android:name="com.coin.special.proxy.service.GetServerProcessDataService"-->
-        <!--android:process=":coinServer" />-->
-
-        <!--<service-->
-        <!--android:name="com.coin.special.proxy.service.ProxyService"-->
-        <!--android:process=":coinServer" />-->
-
     </application>
 
 </manifest>
