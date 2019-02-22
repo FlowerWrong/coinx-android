@@ -267,7 +267,7 @@ public class SliceView extends View {
                 }
 
                 // 抬起点不再范围内
-                if(upIndex == NONE){
+                if (upIndex == NONE) {
                     break;
                 }
 
@@ -279,7 +279,7 @@ public class SliceView extends View {
                 boolean result = upIndex == LEFT;
 
                 // 如果和之前一样的话，不回调
-                if(result == isSelectLeft){
+                if (result == isSelectLeft) {
                     break;
                 }
 

@@ -17,7 +17,7 @@ public class TestPresenter extends BasePresenter<TestView> {
         super(mView);
     }
 
-    public void test(){
+    public void test() {
 //        mView.onSuccess();
     }
 

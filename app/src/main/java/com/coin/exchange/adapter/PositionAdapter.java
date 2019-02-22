@@ -114,7 +114,7 @@ public class PositionAdapter extends RecyclerView.Adapter<PositionAdapter.ViewHo
 
         if (!TextUtils.isEmpty(item.getUnit())) {
             holder.tvIncomeTitle.setText("收益(" + item.getUnit() + ")");
-        }else{
+        } else {
             holder.tvIncomeTitle.setText("已收益(BTC)");
         }
 

@@ -51,7 +51,7 @@ public abstract class JBaseDialogFragment extends AppCompatDialogFragment {
         initStyle();
     }
 
-    protected void initStyle(){
+    protected void initStyle() {
         setStyle(DialogFragment.STYLE_NO_TITLE, R.style.JFrameDialog);
     }
 
@@ -73,7 +73,7 @@ public abstract class JBaseDialogFragment extends AppCompatDialogFragment {
 
     protected void initWindows(Window window) {
 
-        if(this.mAnim != CLOSE){
+        if (this.mAnim != CLOSE) {
             if (this.mAnim == NONE) {
                 //取消默认动画可传NONE
                 if (JFrameManager.getInstance().getDialogAnim() != NONE) {
@@ -134,7 +134,7 @@ public abstract class JBaseDialogFragment extends AppCompatDialogFragment {
     }
 
     //关闭动画
-    public void closeAnim(){
+    public void closeAnim() {
         this.mAnim = CLOSE;
     }
 

@@ -8,5 +8,4 @@ package com.coin.exchange.model.okex.webSocket.response;
 public class KLineRes {
 
 
-
 }

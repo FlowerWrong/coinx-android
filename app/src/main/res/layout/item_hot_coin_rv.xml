@@ -3,7 +3,6 @@
     android:id="@+id/rv_hot_coin"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
 </android.support.v7.widget.RecyclerView>

@@ -25,6 +25,7 @@ public class ActivityTradeFragment extends JBaseFragment {
     private TradeOkAndBitFragment tradeOkexFragment;
     private TradeBusinessFragment tradeBusinessFragment;
     private String from = "";
+
     public static Fragment newInstance(String from) {
         ActivityTradeFragment fragment = new ActivityTradeFragment();
         Bundle bundle = new Bundle();
@@ -59,7 +60,7 @@ public class ActivityTradeFragment extends JBaseFragment {
 
             }
         });
-        tradeOkexFragment = TradeOkAndBitFragment.newInstance(from+"trade");//from+"trade"代表下单界面进入的
+        tradeOkexFragment = TradeOkAndBitFragment.newInstance(from + "trade");//from+"trade"代表下单界面进入的
         tradeOkexFragment.setListener(new TradeOkAndBitFragment.ActionListener() {
             @Override
             public void onViewClick() {

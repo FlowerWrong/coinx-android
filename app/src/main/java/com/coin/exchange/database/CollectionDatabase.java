@@ -23,7 +23,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 
-
 public class CollectionDatabase extends SQLiteOpenHelper implements CollectionModel {
 
     private static final String TAG = "CollectionDatabase";

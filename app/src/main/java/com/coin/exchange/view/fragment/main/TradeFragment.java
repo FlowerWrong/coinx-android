@@ -69,7 +69,7 @@ public class TradeFragment extends JLazyFragment {
         if (currency == 1) {
             mViewPager.setCurrentItem(1);
             currency = 1;
-        }else {
+        } else {
             mViewPager.setCurrentItem(0);
             currency = 0;
         }

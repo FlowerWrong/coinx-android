@@ -76,7 +76,7 @@ public class JWebViewManager {
 //            Context context = fragment.getContext();
 //            WebView webView = fragment.getWebView();
 
-            Log.i(TAG, "jsCallBackApp: type"+type+";content"+content);
+            Log.i(TAG, "jsCallBackApp: type" + type + ";content" + content);
 
         }
 

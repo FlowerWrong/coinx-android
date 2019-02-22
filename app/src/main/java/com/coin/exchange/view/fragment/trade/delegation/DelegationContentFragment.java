@@ -202,9 +202,9 @@ public class DelegationContentFragment extends JLoadMoreFragment<DelegationConte
     @Override
     public void onClickCancel(String orderId, String insId, int position) {
         showDialog();
-        if(mPlatform.equals(AppUtils.BITMEX)){
+        if (mPlatform.equals(AppUtils.BITMEX)) {
             mPresenter.cancelBitMexOrder(orderId, position);
-        }else if(mPlatform.equals(AppUtils.OKEX)){
+        } else if (mPlatform.equals(AppUtils.OKEX)) {
             mPresenter.cancelOrder(orderId, insId, position);
         }
     }

@@ -19,7 +19,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -30,5 +29,4 @@ dependencies {
     })
 
     implementation project(":lib.base")
-
 }

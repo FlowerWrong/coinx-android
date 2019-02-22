@@ -5,7 +5,6 @@ import com.coin.exchange.model.okex.response.FuturesInstrumentsTickerList;
 import java.util.List;
 
 
-
 public class Team {
     public final String title;
     public final List<FuturesInstrumentsTickerList> members;

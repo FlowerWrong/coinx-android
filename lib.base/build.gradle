@@ -49,7 +49,7 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:${lib.dagger}"
     compileOnly "javax.annotation:jsr250-api:${lib.annotation}"
 
-    //视图绑定（butterknife）
+    // 视图绑定（butterknife）
     api "com.jakewharton:butterknife:${lib.butterknife}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${lib.butterknife}"
 
@@ -59,7 +59,7 @@ dependencies {
     api "com.github.zincPower:JRecycleview:${lib.JRecycleView}"
     api "com.github.zincPower:JPermission:${lib.JPermission}"
 
-    //EventBus
+    // EventBus
     api "org.greenrobot:eventbus:${lib.eventBus}"
 
     api "com.android.support:design:27.1.1"

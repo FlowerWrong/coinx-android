@@ -33,6 +33,7 @@ public abstract class JLazyFragment<T extends BasePresenter> extends JBaseFragme
         this.onVisible();
 
     }
+
     //是否要懒加载；true开启懒加载，false关闭懒加载
     protected boolean isLazyLoad() {
         return true;

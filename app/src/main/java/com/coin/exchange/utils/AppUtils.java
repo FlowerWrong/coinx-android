@@ -254,6 +254,7 @@ public class AppUtils {
                     }
                 });
     }
+
     /**
      * 获取手机状态栏的高度
      *

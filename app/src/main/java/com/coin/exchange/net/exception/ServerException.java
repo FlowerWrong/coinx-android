@@ -5,7 +5,7 @@ package com.coin.exchange.net.exception;
  * in LibModule
  */
 
-public class ServerException extends RuntimeException{
+public class ServerException extends RuntimeException {
     private int code;
     private String message;
 

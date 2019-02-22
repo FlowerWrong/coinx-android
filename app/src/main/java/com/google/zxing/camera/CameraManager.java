@@ -351,6 +351,7 @@ public final class CameraManager {
 
     /**
      * 打开或关闭闪光灯
+     *
      * @param isOpen 是否开启闪光灯
      * @return boolean 操作成功/失败。
      */

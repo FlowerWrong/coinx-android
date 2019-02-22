@@ -16,7 +16,7 @@ public abstract class JLoadMoreFragment<T extends BasePresenter> extends JListFr
     //暴露给子类初始化adapter
     protected void initAdapterForChild(RecyclerView.Adapter adapter) {
         this._mAdapter.setIsOpenLoadMore(requestLoadMore());
-        if(requestLoadMore()){
+        if (requestLoadMore()) {
             this._mAdapter.setOnLoadMoreListener(new JRefreshAndLoadMoreAdapter.OnLoadMoreListener() {
                 @Override
                 public void onLoading() {
@@ -31,7 +31,7 @@ public abstract class JLoadMoreFragment<T extends BasePresenter> extends JListFr
         return true;
     }
 
-    protected boolean requestLoadMore(){
+    protected boolean requestLoadMore() {
         return true;
     }
 

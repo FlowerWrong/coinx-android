@@ -268,7 +268,7 @@ public class DelegationContentPresenter extends BasePresenter<DelegationContentV
                                   int pageCount) {
         RetrofitFactory
                 .getBitMexApiService()
-                .getOrder(null,String.format(STATUS_FILTER, mStatus), pageCount)
+                .getOrder(null, String.format(STATUS_FILTER, mStatus), pageCount)
                 .subscribeOn(Schedulers.io())
                 .map(new Function<List<OrderItemRes>, List<DelegationItemVO>>() {
                     @Override

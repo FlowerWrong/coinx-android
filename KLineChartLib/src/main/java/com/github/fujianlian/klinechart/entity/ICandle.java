@@ -28,6 +28,7 @@ public interface ICandle {
 
 
     // 以下为MA数据
+
     /**
      * 五(月，日，时，分，5分等)均价
      */
@@ -54,6 +55,7 @@ public interface ICandle {
     float getMA60Price();
 
     // 以下为BOLL数据
+
     /**
      * 上轨线
      */

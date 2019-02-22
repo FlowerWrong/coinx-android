@@ -72,8 +72,7 @@
         android:paddingRight="25dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center_vertical"
-        >
+        android:layout_gravity="center_vertical">
 
         <TextView
             android:id="@+id/tv_value"

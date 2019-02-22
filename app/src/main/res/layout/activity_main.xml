@@ -14,8 +14,7 @@
         app:tabIndicatorHeight="0dp"
         app:tabSelectedTextColor="@color/blue"
         app:tabTextColor="@color/sub_text_color"
-        android:layout_alignParentBottom="true"
-        />
+        android:layout_alignParentBottom="true" />
 
     <View
         android:id="@+id/v_divider"
@@ -34,7 +33,6 @@
         android:id="@+id/v_status_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
 </RelativeLayout>

@@ -14,18 +14,21 @@ import java.util.List;
 public interface MarketView extends IView {
 
     void onGetHotCoinInfoList(List<HotCoinItemVO> hotCoinItemVOList);
+
     void onGetHotCoinInfoListError();
 
     /**
      * OkEx 的 排行榜回调
      */
     void onGetOkExRankListInfo(List<RankItemVO> rankItemVOList);
+
     void onGetOkExError();
 
     /**
      * BitMex 的 排行榜回调
      */
     void onGetBitMexRankListInfo(List<RankItemVO> rankItemVOList);
+
     void onGetBitMexError();
 
 }

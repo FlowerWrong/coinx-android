@@ -93,7 +93,7 @@ public class TradeActivity extends JBaseActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return FragmentConfig.getTradeActivityFragment(position,from);
+            return FragmentConfig.getTradeActivityFragment(position, from);
         }
 
         @Override

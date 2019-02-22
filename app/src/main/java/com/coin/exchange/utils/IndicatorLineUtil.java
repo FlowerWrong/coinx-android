@@ -16,6 +16,7 @@ import java.lang.reflect.Field;
 public class IndicatorLineUtil {
     /**
      * 调节tablayout指示线宽度
+     *
      * @param tabs
      * @param leftDip
      * @param rightDip

@@ -3,6 +3,7 @@ apply plugin: 'android-aspectjx'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
+
     defaultConfig {
         applicationId rootProject.ext.android.applicationId
         minSdkVersion rootProject.ext.android.minSdkVersion
@@ -13,6 +14,7 @@ android {
 
         multiDexEnabled true
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -20,16 +22,10 @@ android {
         }
     }
 
-//    dexOptions {
-//        incremental true
-//    }
-
     sourceSets {
-
-        main{
-            java.srcDirs = ['src/main/java','src/main/coin']
+        main {
+            java.srcDirs = ['src/main/java', 'src/main/coin']
         }
-
     }
 
 }
@@ -39,23 +35,25 @@ dependencies {
 
     testImplementation "junit:junit:${lib.junit}"
 
+    // dependency injector
     annotationProcessor "com.google.dagger:dagger-compiler:${lib.dagger}"
     compileOnly "javax.annotation:jsr250-api:${lib.annotation}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${lib.butterknife}"
 
+    // reactive streams
     implementation 'com.anthonycr.bonsai:bonsai:1.1.0'
 
     implementation project(":lib.base")
 
     implementation project(':KLineChartLib')
 
-    //滚轮控件
+    // 滚轮控件
     implementation 'com.weigan:loopView:0.1.2'
 
     // zxing 二维码
-    implementation 'com.google.zxing:core:3.3.0'
+    implementation 'com.google.zxing:core:3.3.3'
 
-    implementation 'org.aspectj:aspectjrt:1.8.9'
+    implementation 'org.aspectj:aspectjrt:1.8.13'
 
     // 轮播图
     implementation 'com.youth.banner:banner:1.4.10'

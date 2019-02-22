@@ -54,11 +54,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text="SingleFuturesPositionRes" />
+
             <Button
                 android:id="@+id/accounts"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text="单个币种合约账户信息" />
+
             <Button
                 android:id="@+id/ledger"
                 android:layout_width="match_parent"
@@ -100,21 +102,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text=" 获取全部ticker信息" />
+
             <Button
                 android:id="@+id/trades"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text=" 获取成交数据" />
+
             <Button
                 android:id="@+id/kline"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text=" 获取K线数据" />
+
             <Button
                 android:id="@+id/FuturesInstrumentsIndexRes"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:text=" 获取指数信息" />
+
             <Button
                 android:id="@+id/open_interest"
                 android:layout_width="match_parent"

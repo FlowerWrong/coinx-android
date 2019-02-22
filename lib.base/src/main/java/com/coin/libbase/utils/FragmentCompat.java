@@ -113,7 +113,7 @@ public class FragmentCompat {
 
                 String toName = fragment.getClass().getName();
 
-                if(!fragmentManager.getFragments().contains(fragment)){
+                if (!fragmentManager.getFragments().contains(fragment)) {
                     ft.add(containerId, fragment, toName);
                 }
 

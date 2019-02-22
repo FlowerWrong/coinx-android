@@ -36,7 +36,8 @@
         <item name="colorPrimaryDark">@color/jColorToolbar</item><!--状态栏颜色-->
         <item name="colorAccent">@color/jColorToolbar</item><!--带选中等状态控件的颜色-->
         <item name="colorControlNormal">@color/jColorTitle</item><!--图标颜色左边及右边-->
-        <item name="actionMenuTextColor">@color/jColorTitle</item><!--右边文字颜色 优先级高与 textColorPrimary-->
+        <item name="actionMenuTextColor">@color/jColorTitle
+        </item><!--右边文字颜色 优先级高与 textColorPrimary-->
     </style>
 
 </resources>

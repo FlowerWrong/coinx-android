@@ -45,7 +45,7 @@ public class MarketAdapter extends RecyclerView.Adapter implements RankTitleAdap
     // 图片
     private final static int BANNER = 0;
     // 热门币种
-    private final static int HOT_COIN  = 1;
+    private final static int HOT_COIN = 1;
     // 分割线
     private final static int DIVIDER_LINE = 2;
     // 排行榜的类别

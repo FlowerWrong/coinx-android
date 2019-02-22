@@ -67,7 +67,7 @@ public final class MineBindFragment extends JBaseFragment<MineBindPresenter> imp
     LinearLayout rlBind;
     private double BTC_USDValue = 1;//okex btc 转换美元
     private double XBT_USDValue = 1;//bitmex XBT 转换美元
-//    private double EThValue = 0;
+    //    private double EThValue = 0;
 //    private double BTCValue = 0;
     private double AllBTCValue = 0;
     private double AllValue = 0;
