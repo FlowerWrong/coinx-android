@@ -65,7 +65,8 @@
         <RelativeLayout
             android:id="@+id/rl_okex_icon"
             android:layout_width="100dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/iv_okex_icon"

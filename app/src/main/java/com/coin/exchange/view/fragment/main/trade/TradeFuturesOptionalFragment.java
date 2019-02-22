@@ -48,7 +48,7 @@ import io.reactivex.annotations.NonNull;
 /**
  * @author dean
  * @date 创建时间：2018/11/8
- * @description
+ * @description 自选
  */
 public class TradeFuturesOptionalFragment extends JBaseFragment {
     private static final String FROM = "from";
@@ -162,7 +162,7 @@ public class TradeFuturesOptionalFragment extends JBaseFragment {
         startActivity(intent);
     }
 
-    @OnClick({R.id.tv_add_optional, R.id.tv_add_optional_normal}) //自选页面点击添加自选发送消息
+    @OnClick({R.id.tv_add_optional, R.id.tv_add_optional_normal}) // 自选页面点击添加自选发送消息
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.tv_add_optional:
@@ -174,7 +174,7 @@ public class TradeFuturesOptionalFragment extends JBaseFragment {
         }
     }
 
-    //从数据库中获取自选
+    // 从数据库中获取自选
     private void getOptional() {
         collectionModel.getAllCollection().subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.main())
@@ -185,7 +185,7 @@ public class TradeFuturesOptionalFragment extends JBaseFragment {
                         List<CollectionItem> okex = new ArrayList<>();
                         List<CollectionItem> bitmex = new ArrayList<>();
                         for (int i = 0; i < item.size(); i++) {
-                            if (item.get(i).getPosition() == 0) {//0 代表的是okex
+                            if (item.get(i).getPosition() == 0) { // 0 代表的是okex
                                 okex.add(item.get(i));
                             } else {
                                 bitmex.add(item.get(i));
@@ -234,14 +234,14 @@ public class TradeFuturesOptionalFragment extends JBaseFragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && isCreated) {
-            getOptional(); //点击自选和全部之后页面刷新
+            getOptional(); // 点击自选和全部之后页面刷新
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-//        getOptional();  //TODO 从K线图页面调回来刷新一下
+//        getOptional();  // TODO 从K线图页面调回来刷新一下
     }
 
     @Override
@@ -249,11 +249,11 @@ public class TradeFuturesOptionalFragment extends JBaseFragment {
         try {
             List<CommonRes> commonResList = list;
             DetailRes detailRes;
-            if (from.equals(AppUtils.OKEX)) { //okex
+            if (from.equals(AppUtils.OKEX)) { // okex
                 String channel = commonResList.get(0).getChannel();
-                String icon = channel.substring(17, 20); //截取币种，如btc
+                String icon = channel.substring(17, 20); // 截取币种，如btc
                 String time = "";
-                if (channel.contains("ticker")) {  //对ticker的推送消息才进行处理
+                if (channel.contains("ticker")) {  // 对ticker的推送消息才进行处理
                     detailRes = (DetailRes) GsonUtils.getInstance().fromJson(
                             commonResList.get(0).getData().toString(), DetailRes.class);
                     if (detailRes != null) {
@@ -276,7 +276,7 @@ public class TradeFuturesOptionalFragment extends JBaseFragment {
                         }
                     }
                 }
-            } else if (from.equals(AppUtils.BITMEX)) {  //bitmex
+            } else if (from.equals(AppUtils.BITMEX)) {  // bitmex
                 String table = commonResList.get(0).getTable();
                 Object object = commonResList.get(0).getData();
                 if (table == null || object == null) {
@@ -313,6 +313,7 @@ public class TradeFuturesOptionalFragment extends JBaseFragment {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

@@ -16,7 +16,6 @@ import com.coin.exchange.context.AppApplication;
 import com.coin.exchange.R;
 import com.coin.exchange.config.FragmentConfig;
 import com.coin.exchange.cache.PreferenceManager;
-import com.coin.exchange.di.component.AppComponent;
 import com.coin.exchange.model.okex.vo.MenuItemVO;
 import com.coin.exchange.utils.AppUtils;
 import com.coin.exchange.widget.MainTabItem;
@@ -78,7 +77,6 @@ public class MainActivity extends JBaseActivity {
 
     @Override
     protected void initView() {
-
         getFuturesRate();
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             vStatusBar.setVisibility(View.VISIBLE);
@@ -87,7 +85,6 @@ public class MainActivity extends JBaseActivity {
             vStatusBar.setBackgroundColor(ContextCompat.getColor(this, R.color.jColorStateBarAlpha));
             vStatusBar.setLayoutParams(layoutParams);
         }
-
     }
 
     @Override
@@ -124,12 +121,11 @@ public class MainActivity extends JBaseActivity {
                 return mainNav.get(position).getName();
             }
         });
-        //绑定
+        // 绑定
         mTab.setupWithViewPager(mViewPager);
-        //设置自定义视图(curIndex默认选定为第0个)
-        int curIndex = 0;
+        // 设置自定义视图(curIndex默认选定为第1个)
+        int curIndex = 1; // 交易
         for (int i = 0; i < mTab.getTabCount(); i++) {
-
             TabLayout.Tab tab = mTab.getTabAt(i);
             MainTabItem tabItem = new MainTabItem(this)
                     .initData(mainNav.get(i).getName(),
@@ -151,7 +147,6 @@ public class MainActivity extends JBaseActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -161,14 +156,12 @@ public class MainActivity extends JBaseActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
 
     }
 
     public static class PagerAdapter extends FragmentPagerAdapter {
-
         PagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -182,7 +175,6 @@ public class MainActivity extends JBaseActivity {
         public int getCount() {
             return FragmentConfig.getMainNav().size();
         }
-
     }
 
 
@@ -198,7 +190,6 @@ public class MainActivity extends JBaseActivity {
                 .subscribe(new SingleObserver<FuturesRateRes>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
                     }
 
                     @Override

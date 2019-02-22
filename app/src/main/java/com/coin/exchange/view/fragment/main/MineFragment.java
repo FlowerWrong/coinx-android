@@ -68,7 +68,6 @@ public class MineFragment extends JBaseFragment {
         mineViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -94,7 +93,6 @@ public class MineFragment extends JBaseFragment {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
     }

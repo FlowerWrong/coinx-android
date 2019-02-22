@@ -32,7 +32,6 @@ public class UnBindFragment extends PositionInputFragment implements View.OnClic
 
     @Override
     protected void initArgs(Bundle arguments) {
-
     }
 
     @Override
@@ -42,7 +41,6 @@ public class UnBindFragment extends PositionInputFragment implements View.OnClic
 
     @Override
     protected void initView(View view) {
-
     }
 
     @Override
@@ -52,7 +50,6 @@ public class UnBindFragment extends PositionInputFragment implements View.OnClic
 
     @Override
     public void onClick(String clickNum) {
-
     }
 
     @OnClick({R.id.tv_cancel, R.id.tv_done})

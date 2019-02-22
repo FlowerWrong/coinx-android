@@ -1,6 +1,7 @@
 package com.coin.exchange.config;
 
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import com.coin.exchange.R;
 import com.coin.exchange.model.okex.vo.MenuItemVO;
@@ -28,8 +29,8 @@ import java.util.ArrayList;
 public class FragmentConfig {
 
     public static final String INSTRUMENT_ID = "instrumentId";
-    public static final String TYPE = "type";//表示当周，次周，永续等
-    public static final String FROM = "from";//来自okex或者bitmex
+    public static final String TYPE = "type"; // 表示当周，次周，永续等
+    public static final String FROM = "from"; // 来自okex或者bitmex
 
 
     public static final String WEEK = "当周";
@@ -87,8 +88,8 @@ public class FragmentConfig {
 
     static {
         RANK_NAV = new ArrayList<>();
-        RANK_NAV.add(new MenuItemVO(OKEX, AppUtils.OKEX, R.mipmap.icon_okex, true));
-        RANK_NAV.add(new MenuItemVO(BITMEX, AppUtils.BITMEX, R.mipmap.icon_bitmex, false));
+        RANK_NAV.add(new MenuItemVO(OKEX, AppUtils.OKEX, R.mipmap.icon_okex, false));
+        RANK_NAV.add(new MenuItemVO(BITMEX, AppUtils.BITMEX, R.mipmap.icon_bitmex, true));
     }
 
     public static ArrayList<MenuItemVO> getRankNav() {
@@ -108,8 +109,7 @@ public class FragmentConfig {
     static {
         TRADE_NAV = new ArrayList<>();
         TRADE_NAV.add(new MenuItemVO(0, AppUtils.BITMEX, R.drawable.bitmex_icon));
-        TRADE_NAV.add(new MenuItemVO(1, AppUtils.OKEX, R.drawable.okex_icon));
-
+        // TRADE_NAV.add(new MenuItemVO(1, AppUtils.OKEX, R.drawable.okex_icon));
     }
 
     public static ArrayList<MenuItemVO> getTradeNav() {
@@ -123,6 +123,7 @@ public class FragmentConfig {
      * @return 对应的fragment
      */
     public static Fragment getTradeFragment(int index) {
+        Log.i("getTradeFragment", String.valueOf(index));
         Fragment fragment;
         switch (index) {
             case 0:
@@ -354,9 +355,8 @@ public class FragmentConfig {
 
     static {
         MINE_NAV = new ArrayList<>();
-        MINE_NAV.add(new MenuItemVO(0, AppUtils.OKEX));
-        MINE_NAV.add(new MenuItemVO(1, AppUtils.BITMEX));
-
+        MINE_NAV.add(new MenuItemVO(0, AppUtils.BITMEX));
+        MINE_NAV.add(new MenuItemVO(1, AppUtils.OKEX));
     }
 
     public static ArrayList<MenuItemVO> getMineNav() {
@@ -372,14 +372,14 @@ public class FragmentConfig {
     public static Fragment getMineFragment(int index) {
         Fragment fragment;
         switch (index) {
-            case 0:
+            case 1:
                 fragment = MineBindFragment.newInstance(AppUtils.OKEX);
                 break;
-            case 1:
+            case 0:
                 fragment = MineBindFragment.newInstance(AppUtils.BITMEX);
                 break;
             default:
-                fragment = MineBindFragment.newInstance(AppUtils.OKEX);
+                fragment = MineBindFragment.newInstance(AppUtils.BITMEX);
         }
         return fragment;
     }

@@ -98,7 +98,6 @@ public abstract class JBaseActivity<T extends BasePresenter> extends AppCompatAc
 
     @Override
     protected void onDestroy() {
-
         EXIST_ACTIVITIES.remove(this);
         unregisterLogic();
 
@@ -289,7 +288,6 @@ public abstract class JBaseActivity<T extends BasePresenter> extends AppCompatAc
      * 注销一些第三方框架
      */
     private void unregisterLogic() {
-
         // 注册 EventBus
         if (isContain(EVENT_BUS)) {
             EventBus.getDefault().unregister(this);
@@ -298,7 +296,6 @@ public abstract class JBaseActivity<T extends BasePresenter> extends AppCompatAc
         if (isContain(BUTTER_KNIFE) && unbinder != null) {
             unbinder.unbind();
         }
-
     }
 
     /**

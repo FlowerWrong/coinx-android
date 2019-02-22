@@ -46,7 +46,7 @@ public class TradeOkAndBitFragment extends JBaseFragment {
     LinearLayout ll_gone_collection;
     private ActionListener mListener;
     private String from = "";
-    private int currency = 0;
+    private int currency = 0; // 自选 全部
 
     public static TradeOkAndBitFragment newInstance(String from) {
         TradeOkAndBitFragment fragment = new TradeOkAndBitFragment();
@@ -65,7 +65,7 @@ public class TradeOkAndBitFragment extends JBaseFragment {
     protected void initView(View view) {
         Bundle arguments = getArguments();
         from = arguments.getString(FROM);
-        if (from.contains("trade")) {//含有"trade"代表下单界面进入的，影藏右边和谐边框
+        if (from.contains("trade")) { // 含有"trade"代表下单界面进入的，影藏右边和谐边框
             from = from.replace("trade", "");
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) ll_show_collection.getLayoutParams();
             params.setMargins(0, 0, AppUtils.dpToPx(50), 0);
@@ -83,9 +83,7 @@ public class TradeOkAndBitFragment extends JBaseFragment {
         });
         // 设置不会回收的数
         mViewPager.setOffscreenPageLimit(okTradeNav.size());
-        if (currency != 0 && mViewPager != null
-                && tvOkexTradeOptional != null
-                && tvOkexTradeAll != null) {
+        if (currency != 0 && mViewPager != null && tvOkexTradeOptional != null && tvOkexTradeAll != null) {
             mViewPager.setCurrentItem(currency);
             tvOkexTradeOptional.setTextColor(getResources().getColor(R.color.time_blue));
             tvOkexTradeAll.setTextColor(getResources().getColor(R.color.blue));
@@ -120,15 +118,14 @@ public class TradeOkAndBitFragment extends JBaseFragment {
     }
 
     @Subscribe
-    public void onOptional(Event.AddOptionalEvent event) {  //自选页面点击添加自选后EventBus的实现处
-        mViewPager.setCurrentItem(1);
+    public void onOptional(Event.AddOptionalEvent event) {  // 自选页面点击添加自选后EventBus的实现处
+        mViewPager.setCurrentItem(1); // 全部
         currency = 1;
         tvOkexTradeOptional.setTextColor(getResources().getColor(R.color.sub_text_color));
         tvOkexTradeAll.setTextColor(getResources().getColor(R.color.blue));
     }
 
     public class OkTradePagerAdapter extends FragmentPagerAdapter {
-
         OkTradePagerAdapter(FragmentManager fm) {
             super(fm);
         }
@@ -142,7 +139,6 @@ public class TradeOkAndBitFragment extends JBaseFragment {
         public int getCount() {
             return FragmentConfig.getOKTradeNav().size();
         }
-
     }
 
     public interface ActionListener {
