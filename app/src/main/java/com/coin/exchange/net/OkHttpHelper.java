@@ -82,7 +82,7 @@ public class OkHttpHelper {
     }
 
     /**
-     * 获取正式的 BitMex OkHttp 实例
+     * 获取正式的 OkEx OkHttp 实例
      *
      * @return
      */

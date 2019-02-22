@@ -34,7 +34,6 @@ public class LogInterceptor implements Interceptor {
 
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
-
         int requestId = random.nextInt(1000000);
 
         Request request = chain.request();

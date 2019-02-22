@@ -31,7 +31,6 @@ public class CommonParamsInterceptor implements Interceptor {
 
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
-
         Request request = chain.request();
         Request.Builder requestBuilder = request.newBuilder();
 

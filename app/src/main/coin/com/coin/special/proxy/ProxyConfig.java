@@ -27,7 +27,7 @@ public class ProxyConfig {
     public static final int TIMEOUT = 0;
 
     // 远程服务器的地址
-    public static final String REMOTE_SERVER = "www0.qqweb0.com";
+    public static final String REMOTE_SERVER = "";
     // 远程服务器的端口
     public static final int REMOTE_SERVER_PORT = 28090;
 

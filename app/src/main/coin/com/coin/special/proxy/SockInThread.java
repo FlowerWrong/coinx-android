@@ -67,7 +67,6 @@ public class SockInThread implements Runnable {
     @Override
     public void run() {
         try {
-
             //与客户端的输入流
             InputStream isIn = new BufferedInputStream(mSocketIn.getInputStream());
             //与客户端的输出流
