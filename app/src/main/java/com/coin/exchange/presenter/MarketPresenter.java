@@ -44,12 +44,6 @@ public class MarketPresenter extends BasePresenter<MarketView> {
     private static final String ETH = "ETH";
     private static final String ETH_NAME = "ETH/USD";
 
-    private static final String BCHZ18 = "BCHZ18";
-    private static final String BCH = "BCH";
-    private static final String BCH_NAME = "BCH/Z18";
-    private static final String BITMEX_XBT = "xbt";
-    private static final String BITMEX_USD = "usd";
-
     private static final String[] ONE = {"当周"};
     private static final String[] TWO = {"当周", "当季"};
     private static final String[] THREE = {"当周", "次周", "当季"};
@@ -84,9 +78,6 @@ public class MarketPresenter extends BasePresenter<MarketView> {
                                 setData(list, item, XBT_NAME);
                             } else if (item.getRootSymbol().equals(ETH) && item.getSymbol().equals(ETHUSD)) {
                                 setData(list, item, ETH_NAME);
-                            } else if (item.getRootSymbol().equals(BCH) && !isAddBCH) {
-                                setData(list, item, BCH_NAME);
-                                isAddBCH = true;
                             }
                         }
 

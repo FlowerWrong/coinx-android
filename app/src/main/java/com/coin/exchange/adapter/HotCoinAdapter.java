@@ -3,18 +3,15 @@ package com.coin.exchange.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.coin.exchange.R;
 import com.coin.exchange.aop.CheckLogin;
-import com.coin.exchange.cache.CacheHelper;
 import com.coin.exchange.config.FragmentConfig;
 import com.coin.exchange.model.okex.vo.HotCoinItemVO;
 import com.coin.exchange.mvp.KLine.KLineActivity;
