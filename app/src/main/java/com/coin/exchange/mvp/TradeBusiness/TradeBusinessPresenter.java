@@ -31,6 +31,7 @@ import com.coin.libbase.utils.DoubleUtils;
 import com.coin.libbase.utils.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +56,7 @@ public final class TradeBusinessPresenter extends BasePresenter<TradeBusinessVie
         super(view);
     }
 
-    //获取单个ticker信息
+    // 获取单个ticker信息
     public void getFuturesInfo(String instrumentId) {
         RetrofitFactory
                 .getOkExApiService()
@@ -75,7 +76,7 @@ public final class TradeBusinessPresenter extends BasePresenter<TradeBusinessVie
                 });
     }
 
-    //获取24小时之前k线图信息
+    // 获取24小时之前k线图信息
     public void getCandles(String instrumentId, final double prise) {
         RetrofitFactory
                 .getOkExApiService()
@@ -98,7 +99,7 @@ public final class TradeBusinessPresenter extends BasePresenter<TradeBusinessVie
                 });
     }
 
-    //获取合约持仓信息
+    // 获取合约持仓信息
     public void getFuturesPositionInfo(String instrumentId) {
         RetrofitFactory
                 .getOkExApiService()
@@ -118,7 +119,7 @@ public final class TradeBusinessPresenter extends BasePresenter<TradeBusinessVie
                 });
     }
 
-    //获取深度数据
+    // 获取深度数据
     public void getFuturesBook(String instrumentId) {
         RetrofitFactory
                 .getOkExApiService()
@@ -138,7 +139,7 @@ public final class TradeBusinessPresenter extends BasePresenter<TradeBusinessVie
                 });
     }
 
-    //获取指数信息
+    // 获取指数信息
     public void getFuturesIndex(String instrumentId) {
         RetrofitFactory
                 .getOkExApiService()
@@ -158,7 +159,7 @@ public final class TradeBusinessPresenter extends BasePresenter<TradeBusinessVie
                 });
     }
 
-    //单个币种合约账户信息
+    // 单个币种合约账户信息
     public void getFuturesCurrencyInfo(String instrumentId) {
         RetrofitFactory
                 .getOkExApiService()
@@ -178,7 +179,7 @@ public final class TradeBusinessPresenter extends BasePresenter<TradeBusinessVie
                 });
     }
 
-    //下单
+    // 下单
     public void futuresOrder(FuturesOrderReq futuresOrderReq) {
         RetrofitFactory
                 .getOkExApiService()
@@ -198,7 +199,7 @@ public final class TradeBusinessPresenter extends BasePresenter<TradeBusinessVie
                 });
     }
 
-    //撤单
+    // 撤单
     public void cancelOrder(final String orderId, String insId) {
         RetrofitFactory
                 .getOkExApiService()
@@ -218,7 +219,7 @@ public final class TradeBusinessPresenter extends BasePresenter<TradeBusinessVie
                 });
     }
 
-    //获取委托列表
+    // 获取委托列表
     public void getDelegationList(String insId, String status, final int from, final String type) {
         RetrofitFactory
                 .getOkExApiService()
@@ -360,7 +361,7 @@ public final class TradeBusinessPresenter extends BasePresenter<TradeBusinessVie
 
     }
 
-    //获取用户余额
+    // 获取用户余额
     public void getBitmexUserMargin() {
         RetrofitFactory
                 .getBitMexApiService()
@@ -380,7 +381,7 @@ public final class TradeBusinessPresenter extends BasePresenter<TradeBusinessVie
                 });
     }
 
-    //调整杠杆
+    // 调整杠杆
     public void postLeverage(String instrumentId, double leverage) {
         LeverageReq leverageReq = new LeverageReq(instrumentId, leverage);
         RetrofitFactory
@@ -401,7 +402,7 @@ public final class TradeBusinessPresenter extends BasePresenter<TradeBusinessVie
                 });
     }
 
-    //bitmex下单
+    // bitmex下单
     public void bitmexFuturesOrder(OrderReq orderReq) {
         RetrofitFactory
                 .getBitMexApiService()
@@ -422,7 +423,7 @@ public final class TradeBusinessPresenter extends BasePresenter<TradeBusinessVie
                 });
     }
 
-    //bitmex 获取佣金费率，委托中要用到
+    // bitmex 获取佣金费率，委托中要用到
     public void getCommissionInfo(final String insId, final String mStatus, final int pageCount) {
         RetrofitFactory
                 .getBitMexApiService()
@@ -449,7 +450,7 @@ public final class TradeBusinessPresenter extends BasePresenter<TradeBusinessVie
                 });
     }
 
-    //获取委托列表
+    // 获取委托列表
     public void getBitMEXDeleInfo(final String insId, final Map<String, CommissionRes> commissionResMap,
                                   String mStatus,
                                   int pageCount) {
@@ -518,6 +519,8 @@ public final class TradeBusinessPresenter extends BasePresenter<TradeBusinessVie
                             result.add(itemVO);
 
                         }
+
+                        Collections.reverse(result);
                         return result;
                     }
                 })
@@ -536,7 +539,7 @@ public final class TradeBusinessPresenter extends BasePresenter<TradeBusinessVie
                 });
     }
 
-    //撤单
+    // 撤单
     public void cancelBitMexOrder(String orderId) {
         CancelOrderReq req = new CancelOrderReq(orderId);
         RetrofitFactory

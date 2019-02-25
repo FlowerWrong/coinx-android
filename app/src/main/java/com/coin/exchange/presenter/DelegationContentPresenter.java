@@ -20,6 +20,7 @@ import com.coin.libbase.presenter.BasePresenter;
 import com.coin.libbase.utils.DoubleUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -258,7 +259,6 @@ public class DelegationContentPresenter extends BasePresenter<DelegationContentV
 
                     @Override
                     protected void onSuccessRes(Map<String, CommissionRes> value) {
-
                     }
                 });
     }
@@ -329,8 +329,9 @@ public class DelegationContentPresenter extends BasePresenter<DelegationContentV
                             itemVO.setSell(item.getSide().equals(SELL));
 
                             result.add(itemVO);
-
                         }
+
+                        Collections.reverse(result);
                         return result;
                     }
                 })

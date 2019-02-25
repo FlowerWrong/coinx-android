@@ -101,6 +101,10 @@ public interface BitMexApiService {
                                             @Query("filter") String filter,
                                             @Query("count") int count);
 
+    /**
+     * 获取账户佣金状态
+     * @return
+     */
     @GET("user/commission")
     Observable<Map<String, CommissionRes>> getCommission();
 

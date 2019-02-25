@@ -13,11 +13,8 @@ import android.view.ViewGroup;
 
 import com.coin.exchange.R;
 import com.coin.exchange.config.FragmentConfig;
-import com.coin.exchange.model.okex.vo.MenuItemVO;
 import com.coin.exchange.utils.AppUtils;
 import com.coin.libbase.view.fragment.JBaseFragment;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 
@@ -46,7 +43,6 @@ public class BitMEXDelegationFragment extends JBaseFragment {
 
     @Override
     protected void initView(View view) {
-
         viewPager.setAdapter(new PagerAdapter(getChildFragmentManager()) {
             @Nullable
             @Override
@@ -57,7 +53,6 @@ public class BitMEXDelegationFragment extends JBaseFragment {
         viewPager.setOffscreenPageLimit(FragmentConfig.getBitMEXDeleNav().size());
 
         tabLayout.setupWithViewPager(viewPager);
-
     }
 
     public static class PagerAdapter extends FragmentPagerAdapter {

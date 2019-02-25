@@ -50,7 +50,6 @@ public class DelegationContentFragment extends JLoadMoreFragment<DelegationConte
                                                         String status,
                                                         String type,
                                                         String platform) {
-
         Bundle bundle = new Bundle();
         bundle.putString(INS_ID, insId);
         bundle.putString(STATUS, status);
@@ -61,7 +60,6 @@ public class DelegationContentFragment extends JLoadMoreFragment<DelegationConte
         fragment.initArgs(bundle);
 
         return fragment;
-
     }
 
     @Override
@@ -115,7 +113,7 @@ public class DelegationContentFragment extends JLoadMoreFragment<DelegationConte
 
         getRootAdapter().onSuccess();
 
-        if (list.size() == 0 && mData.size() == 0) {    // 完全没数据，显示空
+        if (list.size() == 0 && mData.size() == 0) { // 完全没数据，显示空
             getRootAdapter().onEmpty();
             return;
         }
@@ -124,7 +122,6 @@ public class DelegationContentFragment extends JLoadMoreFragment<DelegationConte
             mData.clear();
             mData.addAll(list);
             getRootAdapter().notifyDataSetChanged();
-            return;
         } else {
             ++mFrom;
 
@@ -134,14 +131,12 @@ public class DelegationContentFragment extends JLoadMoreFragment<DelegationConte
             }
             mData.addAll(list);
 
-            if (list.size() < PAGE_COUNT) {          // 数据不够 100 ，显示没有更多
+            if (list.size() < PAGE_COUNT) { // 数据不够 100 ，显示没有更多
                 getRootAdapter().setNoMore();
             }
 
             getRootAdapter().notifyDataSetChanged();
         }
-
-
     }
 
     @Override
@@ -157,7 +152,6 @@ public class DelegationContentFragment extends JLoadMoreFragment<DelegationConte
 
     @Override
     public void onCancelSuc(String orderId, int position) {
-
         DelegationItemVO itemVO = mData.get(position);
         if (itemVO.getOrderId().equals(orderId)) {
             mData.remove(position);
@@ -185,7 +179,6 @@ public class DelegationContentFragment extends JLoadMoreFragment<DelegationConte
      * 进行请求
      */
     public void sendReq(String insId, String status, String type) {
-
         getRootAdapter().resetLoadMore();
         getRootAdapter().onLoading();
 

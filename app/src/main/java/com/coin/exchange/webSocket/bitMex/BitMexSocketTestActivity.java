@@ -20,17 +20,14 @@ public class BitMexSocketTestActivity extends JBaseActivity {
 
     @Override
     protected void initIntent(Intent intent) {
-
     }
 
     @Override
     protected void initView() {
-
     }
 
     @Override
     protected void initData() {
-
     }
 
     public void subscribe(View view) {
