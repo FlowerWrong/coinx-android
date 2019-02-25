@@ -35,15 +35,6 @@
 
 
         <ImageView
-            android:id="@+id/iv_kline_zoom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:background="@mipmap/kline_zoom" />
-
-        <ImageView
             android:id="@+id/iv_kline_collection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -228,28 +219,9 @@
 
             </LinearLayout>
 
-            <android.support.design.widget.TabLayout
-                android:id="@+id/kline_tab"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/white"
-                app:tabBackground="@color/white"
-                app:tabGravity="fill"
-                app:tabIndicatorColor="@color/select_blue"
-                app:tabIndicatorHeight="1dp"
-                app:tabMaxWidth="80dp"
-                app:tabSelectedTextColor="@color/select_blue"
-                app:tabTextColor="@color/time_blue" />
-
             <View
                 android:id="@+id/time_show_line"
                 style="@style/line" />
-
-            <com.coin.libbase.widget.NoScrollViewPager
-                android:id="@+id/kline_view_pager"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:visibility="visible" />
 
             <LinearLayout
                 android:id="@+id/ll_trade_list_show"

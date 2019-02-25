@@ -1,1 +1,1 @@
-include ':app', ':lib.base', ':KLineChartLib', ':mvpCreator'
+include ':app', ':lib.base', ':mvpCreator'

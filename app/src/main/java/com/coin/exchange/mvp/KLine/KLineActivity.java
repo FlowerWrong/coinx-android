@@ -3,11 +3,6 @@ package com.coin.exchange.mvp.KLine;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -27,19 +22,14 @@ import com.coin.exchange.database.CollectionModel;
 import com.coin.exchange.model.bitMex.response.InstrumentItemRes;
 import com.coin.exchange.model.okex.response.FuturesInstrumentsTickerList;
 import com.coin.exchange.model.okex.response.FuturesInstrumentsTradesList;
-import com.coin.exchange.model.okex.vo.MenuItemVO;
 import com.coin.exchange.mvp.KLine.di.DaggerKLineComponent;
 import com.coin.exchange.mvp.KLine.di.KLineModule;
 import com.coin.exchange.utils.AppUtils;
 import com.coin.exchange.utils.GsonUtils;
-import com.coin.exchange.utils.IndicatorLineUtil;
 import com.coin.exchange.utils.NumberUtil;
-import com.coin.exchange.view.PopWindow.MoreIndexPopWindow;
-import com.coin.exchange.view.PopWindow.MoreTimePopWindow;
 import com.coin.exchange.view.TradeActivity;
 import com.coin.exchange.webSocket.bitMex.BitMEXWebSocketManager;
 import com.coin.exchange.webSocket.okEx.okExFuture.FutureWebSocketManager;
-import com.coin.exchange.widget.KLineTabItem;
 import com.google.gson.reflect.TypeToken;
 import com.coin.libbase.model.CommonRes;
 import com.coin.libbase.model.eventbus.Event;
@@ -72,14 +62,9 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
     @Inject
     CollectionModel collectionModel;
 
-    @BindView(R.id.kline_tab)
-    TabLayout mTab;
-
     @BindView(R.id.time_show_line)
     View time_show_line;
 
-    @BindView(R.id.kline_view_pager)
-    ViewPager mViewPager;
     @BindView(R.id.iv_kline_back)
     ImageView ivKlineBack;
     @BindView(R.id.tv_kline_currency)
@@ -122,8 +107,6 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
 
     private KlineTradeAdapter klineTradeAdapter;
 
-    private MoreTimePopWindow moreTimePopWindow;
-    private MoreIndexPopWindow moreIndexPopWindow;
     private String instrumentId = "";
     private String insIdCase_3 = "";//合约id前面3位小写
     private String time = "";
@@ -156,127 +139,15 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
     }
 
     protected void initData() {
-        initNAV(from);
-
         if (from.equals(AppUtils.OKEX)) {
-            mViewPager.setOffscreenPageLimit(8); // 设置不会回收的数
-
             mPresenter.getFuturesInfo(instrumentId);
 
             mPresenter.getFuturesInstrumentsTrades(instrumentId, "1", null, "10");
         } else {
-            mViewPager.setOffscreenPageLimit(4);
-
             mPresenter.getBitmexInstrument(instrumentId);
 
             mPresenter.getBitmexTradeList(instrumentId);
         }
-    }
-
-    private void initNAV(final String from) {
-        ArrayList<MenuItemVO> kLineNAV = null;
-        if (from.equals(AppUtils.OKEX)) {
-            kLineNAV = FragmentConfig.getKLineNAV();
-        } else {
-            kLineNAV = FragmentConfig.getBitmexKLineNAV();
-        }
-        mViewPager.setAdapter(new KLInePagerAdapter(getSupportFragmentManager()));
-
-        for (int i = 0; i < kLineNAV.size(); i++) { //mViewPager 和 tab没有绑定必须要创建
-            mTab.addTab(mTab.newTab().setText("Tab" + i));
-        }
-
-        //设置自定义视图(curIndex默认选定为第0个)
-        int curIndex = 0;
-        for (int i = 0; i < mTab.getTabCount(); i++) {
-            TabLayout.Tab tab = mTab.getTabAt(i);
-            KLineTabItem tabItem = new KLineTabItem(this)
-                    .initData(kLineNAV.get(i).getName(), kLineNAV.get(i).getResId(),
-                            kLineNAV.get(i).getId() == curIndex);
-
-            if (tab != null) {
-                tab.setCustomView(tabItem);
-                if (curIndex == i) {
-                    tab.select();
-                }
-            }
-        }
-
-        mTab.post(new Runnable() { //设置指示器长度
-            @Override
-            public void run() {
-                IndicatorLineUtil.setIndicator(mTab, 10, 10);
-            }
-        });
-
-        mTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(final TabLayout.Tab tab) {
-                if (tab.getPosition() == 4 && from.equals(AppUtils.BITMEX)) {
-                    if (moreIndexPopWindow == null) {
-                        moreIndexPopWindow = new MoreIndexPopWindow(KLineActivity.this);
-                        moreIndexPopWindow.setListener(
-                                new MoreIndexPopWindow.ActionListener() {
-                                    @Override
-                                    public void onViewClick(int id) { //没有用到可以全部不要
-                                    }
-                                }
-                        );
-                    }
-                    moreIndexPopWindow.show(time_show_line);
-                } else if (tab.getPosition() == 5) {
-                    if (moreTimePopWindow == null) {
-                        moreTimePopWindow = new MoreTimePopWindow(KLineActivity.this);
-                        moreTimePopWindow.setListener(new MoreTimePopWindow.ActionListener() {
-                            @Override
-                            public void fifteenMinuteClick() {
-                                mViewPager.setCurrentItem(5);
-                            }
-
-                            @Override
-                            public void thirtyMinuteClick() {
-                                mViewPager.setCurrentItem(6);
-                            }
-
-                            @Override
-                            public void oneWeekClick() {
-                                mViewPager.setCurrentItem(7);
-                            }
-                        });
-                    }
-                    moreTimePopWindow.show(time_show_line);
-                } else if (tab.getPosition() == 6) {
-                    if (moreIndexPopWindow == null) {
-                        moreIndexPopWindow = new MoreIndexPopWindow(KLineActivity.this);
-                        moreIndexPopWindow.setListener(
-                                new MoreIndexPopWindow.ActionListener() {
-                                    @Override
-                                    public void onViewClick(int id) { //没有用到可以全部不要
-                                    }
-                                }
-                        );
-                    }
-                    moreIndexPopWindow.show(time_show_line);
-                } else {
-                    mViewPager.setCurrentItem(tab.getPosition());
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 4 && from.equals(AppUtils.BITMEX)) {
-                    moreIndexPopWindow.show(time_show_line);
-                } else if (tab.getPosition() == 5) {
-                    moreTimePopWindow.show(time_show_line);
-                } else if (tab.getPosition() == 6) {
-                    moreIndexPopWindow.show(time_show_line);
-                }
-            }
-        });
     }
 
     @Override
@@ -288,19 +159,9 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
                 .inject(this);
     }
 
-    @OnClick({R.id.iv_kline_zoom, R.id.iv_kline_back, R.id.iv_kline_collection,
-            R.id.tv_kline_buy, R.id.tv_kline_sell})
+    @OnClick({R.id.iv_kline_back, R.id.iv_kline_collection, R.id.tv_kline_buy, R.id.tv_kline_sell})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_kline_zoom:
-                boolean isVertical = (getResources().getConfiguration().orientation
-                        == Configuration.ORIENTATION_PORTRAIT);
-                if (isVertical) {
-                    this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                } else {
-                    this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-                }
-                break;
             case R.id.iv_kline_collection:
                 CollectionItem collectionItem = new CollectionItem(instrumentId, time);
                 AppUtils.isExitAndDelOrAdd(collectionModel, instrumentId,
@@ -381,7 +242,7 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
         tradesList.addAll(tradesLists);
         Collections.reverse(tradesList);
         klineTradeAdapter.updateItems(tradesList);
-        //发送订阅成交信息，要在的destroy 判断是否应该取消订阅
+        // 发送订阅成交信息，要在的destroy 判断是否应该取消订阅
         FutureWebSocketManager.getInstance().subscribeTrade(insIdCase_3, ChannelHelper.getTime(time));
     }
 
@@ -429,40 +290,16 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
         ToastUtil.showCenter(msg);
     }
 
-    public class KLInePagerAdapter extends FragmentPagerAdapter {
-        KLInePagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            if (from.equals(AppUtils.OKEX)) {
-                return FragmentConfig.getKLineFragment(position, instrumentId, from);
-            } else {
-                return FragmentConfig.getBitmexKLineFragment(position, instrumentId, from);
-            }
-        }
-
-        @Override
-        public int getCount() {
-            if (from.equals(AppUtils.OKEX)) {
-                return 8;
-            } else {
-                return 4;
-            }
-        }
-    }
-
     @Override
     protected void onMessage(List list) {
         try {
             List<CommonRes> commonResList = list;
             if (from.equals(AppUtils.OKEX)) {
                 String channel = commonResList.get(0).getChannel();
-                if (channel.contains("trade")) {  //对trade的推送消息才进行处理
-                    String icon = channel.substring(17, 20); //截取币种，如btc
+                if (channel.contains("trade")) {  // 对trade的推送消息才进行处理
+                    String icon = channel.substring(17, 20); // 截取币种，如btc
                     if (insIdCase_3.equals(icon)) {
-                        String toJson = GsonUtils.getGson().toJson(commonResList.get(0).getData());//object 转String
+                        String toJson = GsonUtils.getGson().toJson(commonResList.get(0).getData()); // object 转String
                         final List<List<String>> tradeList = GsonUtils.getGson().fromJson(toJson,
                                 new TypeToken<List<List<String>>>() {
                                 }.getType());
@@ -485,7 +322,7 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
                             for (int i = 0; i < tradesList.size() - ftList.size(); i++) {
                                 tempftList.add(tradesList.get(i));
                             }
-                            //返回到主线程刷新数据
+                            // 返回到主线程刷新数据
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -498,7 +335,7 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
                         }
                     }
                 }
-            } else {  //bitmex
+            } else {  // bitmex
                 String table = commonResList.get(0).getTable();
                 Object object = commonResList.get(0).getData();
                 if (table == null || object == null) {
@@ -525,7 +362,7 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
                             }
                         }
 
-                        //返回到主线程刷新数据
+                        // 返回到主线程刷新数据
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

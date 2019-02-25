@@ -45,8 +45,6 @@ dependencies {
 
     implementation project(":lib.base")
 
-    implementation project(':KLineChartLib')
-
     // 滚轮控件
     implementation 'com.weigan:loopView:0.1.2'
 

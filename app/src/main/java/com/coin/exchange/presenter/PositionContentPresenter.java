@@ -23,7 +23,6 @@ import com.coin.libbase.net.rxjava.RxObservableSubscriber;
 import com.coin.libbase.net.rxjava.RxSingleSubscriber;
 import com.coin.libbase.presenter.BasePresenter;
 import com.coin.libbase.utils.DoubleUtils;
-import com.github.fujianlian.klinechart.utils.DateUtil;
 
 import java.util.ArrayList;
 import java.util.List;

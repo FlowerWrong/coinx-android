@@ -8,7 +8,6 @@ import com.coin.exchange.model.okex.vo.MenuItemVO;
 import com.coin.exchange.mvp.MineBind.MineBindFragment;
 import com.coin.exchange.mvp.TradeFuturesAll.TradeFuturesAllFragment;
 import com.coin.exchange.utils.AppUtils;
-import com.coin.exchange.view.fragment.kline.KFragmentLine;
 import com.coin.exchange.view.fragment.main.MarketFragment;
 import com.coin.exchange.view.fragment.main.MineFragment;
 import com.coin.exchange.view.fragment.main.TradeFragment;
@@ -176,126 +175,6 @@ public class FragmentConfig {
 
             default:
                 fragment = TradeFuturesOptionalFragment.newInstance(from);
-        }
-        return fragment;
-    }
-    //==============================================================================================
-
-    //======================================okex K线页面配置=================================================
-    // 首页导航的菜单
-    private final static ArrayList<MenuItemVO> KLINE_NAV;
-
-    static {
-        KLINE_NAV = new ArrayList<>();
-        KLINE_NAV.add(new MenuItemVO(0, "分时"));
-        KLINE_NAV.add(new MenuItemVO(1, "5分钟"));
-        KLINE_NAV.add(new MenuItemVO(2, "1小时"));
-        KLINE_NAV.add(new MenuItemVO(3, "4小时"));
-        KLINE_NAV.add(new MenuItemVO(4, "日线"));
-        KLINE_NAV.add(new MenuItemVO(5, "更多", R.mipmap.more_icon));
-        KLINE_NAV.add(new MenuItemVO(6, "指标", R.mipmap.more_icon));
-    }
-
-    public static ArrayList<MenuItemVO> getKLineNAV() {
-        return KLINE_NAV;
-    }
-
-    /**
-     * 获取K线图页面 Fragment
-     *
-     * @param index 获取下标
-     * @return 对应的fragment
-     */
-    public static Fragment getKLineFragment(int index, String id, String from) {
-        Fragment fragment;
-        switch (index) {
-            case 0:
-                fragment = KFragmentLine.newInstance(1 * 60, id, from);
-                break;
-            case 1:
-                fragment = KFragmentLine.newInstance(5 * 60, id, from);
-                break;
-            case 2:
-                fragment = KFragmentLine.newInstance(60 * 60, id, from);
-                break;
-            case 3:
-                fragment = KFragmentLine.newInstance(4 * 60 * 60, id, from);
-                break;
-            case 4:
-                fragment = KFragmentLine.newInstance(24 * 60 * 60, id, from);
-                break;
-            case 5:
-                fragment = KFragmentLine.newInstance(15 * 60, id, from);
-                break;
-            case 6:
-                fragment = KFragmentLine.newInstance(30 * 60, id, from);
-                break;
-            case 7:
-                fragment = KFragmentLine.newInstance(7 * 24 * 60 * 60, id, from);
-                break;
-
-            default:
-                fragment = KFragmentLine.newInstance(1 * 60, id, from);
-        }
-        return fragment;
-    }
-
-    //==============================================================================================
-//======================================bitmex K线页面配置=================================================
-    // 首页导航的菜单
-    private final static ArrayList<MenuItemVO> BITMEX_KLINE_NAV;
-
-    static {
-        BITMEX_KLINE_NAV = new ArrayList<>();
-        BITMEX_KLINE_NAV.add(new MenuItemVO(0, "分时"));
-        BITMEX_KLINE_NAV.add(new MenuItemVO(1, "5分钟"));
-        BITMEX_KLINE_NAV.add(new MenuItemVO(2, "1小时"));
-//        BITMEX_KLINE_NAV.add(new MenuItemVO(3, "4小时"));
-        BITMEX_KLINE_NAV.add(new MenuItemVO(3, "日线"));
-//        BITMEX_KLINE_NAV.add(new MenuItemVO(4, "更多", R.mipmap.more_icon));
-        BITMEX_KLINE_NAV.add(new MenuItemVO(4, "指标", R.mipmap.more_icon));
-    }
-
-    public static ArrayList<MenuItemVO> getBitmexKLineNAV() {
-        return BITMEX_KLINE_NAV;
-    }
-
-    /**
-     * 获取K线图页面 Fragment
-     *
-     * @param index 获取下标
-     * @return 对应的fragment
-     */
-    public static Fragment getBitmexKLineFragment(int index, String id, String from) {
-        Fragment fragment;
-        switch (index) {
-            case 0:
-                fragment = KFragmentLine.newInstance(1 * 60, id, from);
-                break;
-            case 1:
-                fragment = KFragmentLine.newInstance(5 * 60, id, from);
-                break;
-            case 2:
-                fragment = KFragmentLine.newInstance(60 * 60, id, from);
-                break;
-//            case 3:
-//                fragment = KFragmentLine.newInstance(4 * 60 * 60, id);
-//                break;
-            case 3:
-                fragment = KFragmentLine.newInstance(24 * 60 * 60, id, from);
-                break;
-//            case 5:
-//                fragment = KFragmentLine.newInstance(15 * 60, id);
-//                break;
-//            case 6:
-//                fragment = KFragmentLine.newInstance(30 * 60, id);
-//                break;
-//            case 7:
-//                fragment = KFragmentLine.newInstance(7 * 24 * 60 * 60, id);
-//                break;
-
-            default:
-                fragment = KFragmentLine.newInstance(1 * 60, id, from);
         }
         return fragment;
     }
