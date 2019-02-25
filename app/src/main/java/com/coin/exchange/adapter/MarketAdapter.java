@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.coin.exchange.R;
 import com.coin.exchange.aop.CheckLogin;
 import com.coin.exchange.config.FragmentConfig;
@@ -24,8 +22,6 @@ import com.coin.exchange.model.okex.vo.RankItemVO;
 import com.coin.exchange.model.okex.vo.RankStateVO;
 import com.coin.exchange.mvp.KLine.KLineActivity;
 import com.coin.exchange.utils.AppUtils;
-import com.youth.banner.Banner;
-import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,20 +38,18 @@ public class MarketAdapter extends RecyclerView.Adapter implements RankTitleAdap
 
     private RankStateVO DEFAULT_RANK_STATE = new RankStateVO(RankStateVO.EMPTY, RankStateVO.EMPTY_MSG);
 
-    // 图片
-    private final static int BANNER = 0;
     // 热门币种
-    private final static int HOT_COIN = 1;
+    private final static int HOT_COIN = 0;
     // 分割线
-    private final static int DIVIDER_LINE = 2;
+    private final static int DIVIDER_LINE = 1;
     // 排行榜的类别
-    private final static int RANK_TYPE = 3;
+    private final static int RANK_TYPE = 2;
     // 排行榜的
-    private final static int RANK_TITLE = 4;
+    private final static int RANK_TITLE = 3;
     // 排行榜的内容
-    private final static int RANK_ITEM = 5;
+    private final static int RANK_ITEM = 4;
     // 排行榜的占位
-    private final static int RANK_REPLACE = 6;
+    private final static int RANK_REPLACE = 5;
 
     public final static int HEADER_COUNT = RANK_ITEM;
     // 个数，顺序：banner、热门、分割线、排行榜头、排行榜、风格线
@@ -74,10 +68,6 @@ public class MarketAdapter extends RecyclerView.Adapter implements RankTitleAdap
     private final List<RankItemVO> mRankItemVOList = new ArrayList<>();
     private RankStateVO mRankStateVO;
 
-    private boolean isRunning;
-    private final List<Integer> mImages;
-    private final GlideImageLoader mImageLoader;
-
     private String curType;
 
     public MarketAdapter(Context context) {
@@ -87,14 +77,6 @@ public class MarketAdapter extends RecyclerView.Adapter implements RankTitleAdap
         mRankTitleAdapter = new RankTitleAdapter(context, this);
 
         mContext = context;
-
-        isRunning = false;
-        mImages = new ArrayList<>();
-        mImages.add(R.mipmap.banner_one);
-        mImages.add(R.mipmap.banner_two);
-        mImages.add(R.mipmap.banner_three);
-        mImageLoader = new GlideImageLoader();
-
     }
 
     /**
@@ -125,9 +107,6 @@ public class MarketAdapter extends RecyclerView.Adapter implements RankTitleAdap
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
-            case BANNER:    // 图片
-                return new BannerViewHolder(mLayoutInflater.inflate(R.layout.item_market_banner,
-                        parent, false));
             case HOT_COIN: // 热门币种
                 return new HotCoinViewHolder(mLayoutInflater.inflate(R.layout.item_hot_coin_rv,
                         parent, false));
@@ -260,16 +239,6 @@ public class MarketAdapter extends RecyclerView.Adapter implements RankTitleAdap
                 });
             }
 
-        } else if (holder instanceof BannerViewHolder) {
-
-            if (!isRunning) {
-                isRunning = true;
-                BannerViewHolder bannerViewHolder = (BannerViewHolder) holder;
-                bannerViewHolder.banner
-                        .setImages(mImages)
-                        .setImageLoader(mImageLoader)
-                        .start();
-            }
         }
     }
 
@@ -302,7 +271,6 @@ public class MarketAdapter extends RecyclerView.Adapter implements RankTitleAdap
      */
     @Override
     public void onClick(int position) {
-
         boolean isChange = false;
 
         for (int i = 0; i < FragmentConfig.getRankNav().size(); ++i) {
@@ -330,29 +298,12 @@ public class MarketAdapter extends RecyclerView.Adapter implements RankTitleAdap
                 mListener.onClick();
             }
         }
-
-    }
-
-    /**
-     * 顶部图片
-     */
-    static class BannerViewHolder extends RecyclerView.ViewHolder {
-
-        @BindView(R.id.banner)
-        Banner banner;
-
-        BannerViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
-
     }
 
     /**
      * 热门币种信息
      */
     static class HotCoinViewHolder extends RecyclerView.ViewHolder {
-
         @BindView(R.id.rv_hot_coin)
         RecyclerView rvHotCoin;
 
@@ -360,14 +311,12 @@ public class MarketAdapter extends RecyclerView.Adapter implements RankTitleAdap
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-
     }
 
     /**
      * 排行榜题
      */
     static class RankTypeViewHolder extends RecyclerView.ViewHolder {
-
         @BindView(R.id.rv_rank_title)
         RecyclerView rvRankTitle;
 
@@ -375,11 +324,9 @@ public class MarketAdapter extends RecyclerView.Adapter implements RankTitleAdap
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-
     }
 
     static class RankStateViewHolder extends RecyclerView.ViewHolder {
-
         @BindView(R.id.tv_tip)
         TextView tvTip;
 
@@ -390,7 +337,6 @@ public class MarketAdapter extends RecyclerView.Adapter implements RankTitleAdap
     }
 
     static class RankItemViewHolder extends RecyclerView.ViewHolder {
-
         @BindView(R.id.tv_rank_num)
         TextView tvRankNum;
         @BindView(R.id.iv_icon)
@@ -436,19 +382,6 @@ public class MarketAdapter extends RecyclerView.Adapter implements RankTitleAdap
 
     public interface ClickListener {
         void onClick();
-    }
-
-    public class GlideImageLoader extends ImageLoader {
-        @Override
-        public void displayImage(Context context, Object path, ImageView imageView) {
-
-            //Glide 加载图片简单用法
-            Glide.with(context)
-                    .load(path)
-                    .into(imageView);
-
-        }
-
     }
 
 }

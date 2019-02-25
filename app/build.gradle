@@ -53,9 +53,6 @@ dependencies {
 
     implementation 'org.aspectj:aspectjrt:1.8.13'
 
-    // 轮播图
-    implementation 'com.youth.banner:banner:1.4.10'
-
     implementation 'com.android.support:multidex:1.0.3'
 
     api project(":mvpCreator")
