@@ -18,7 +18,6 @@ import com.coin.exchange.model.okex.vo.MenuItemVO;
 import com.coin.exchange.utils.AppUtils;
 import com.coin.exchange.view.AboutActivity;
 import com.coin.exchange.view.SettingActivity;
-import com.coin.exchange.view.ShapeActivity;
 import com.coin.libbase.view.fragment.JBaseFragment;
 import com.coin.libbase.widget.NoScrollViewPager;
 
@@ -37,8 +36,6 @@ public class MineFragment extends JBaseFragment {
     @BindView(R.id.mine_view_pager)
     NoScrollViewPager mineViewPager;
 
-    @BindView(R.id.tv_shape)
-    TextView tvShape;
     @BindView(R.id.tv_setting)
     TextView tvSetting;
     @BindView(R.id.tv_one)
@@ -115,14 +112,11 @@ public class MineFragment extends JBaseFragment {
 
     }
 
-    @OnClick({R.id.tv_about, R.id.tv_shape, R.id.tv_setting})
+    @OnClick({R.id.tv_about, R.id.tv_setting})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_about:
                 startActivity(new Intent(getContext(), AboutActivity.class));
-                break;
-            case R.id.tv_shape:
-                startActivity(new Intent(getContext(), ShapeActivity.class));
                 break;
             case R.id.tv_setting:
                 startActivity(new Intent(getContext(), SettingActivity.class));

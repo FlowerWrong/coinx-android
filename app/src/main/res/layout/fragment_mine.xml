@@ -67,17 +67,6 @@
         android:layout_marginLeft="40dp"
         android:background="@color/divider_color" />
 
-    <TextView
-        android:id="@+id/tv_shape"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="15dp"
-        android:drawableLeft="@mipmap/shape_icon"
-        android:gravity="center_vertical"
-        android:text="@string/share_app"
-        android:textColor="@color/main_text_color"
-        android:textSize="14dp" />
-
     <View
         style="@style/line"
         android:layout_marginLeft="40dp"

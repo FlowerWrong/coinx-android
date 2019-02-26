@@ -57,10 +57,6 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".view.ShapeActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
             android:name=".webSocket.bitMex.BitMexSocketTestActivity"
             android:screenOrientation="portrait" />
 
