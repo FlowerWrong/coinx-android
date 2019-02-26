@@ -1,14 +1,10 @@
 package com.coin.exchange.di.component;
 
 import com.coin.exchange.di.module.MarketModule;
-import com.coin.exchange.di.module.TestModule;
 import com.coin.exchange.di.scope.ActivityScope;
 import com.coin.exchange.view.fragment.main.MarketFragment;
 
-import javax.inject.Inject;
-
 import dagger.Component;
-import dagger.Module;
 
 /**
  * @author Jiang zinc

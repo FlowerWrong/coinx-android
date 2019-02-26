@@ -53,7 +53,6 @@ public class ClzNameHelper {
         typeName.put(FRAGMENT, clzNamePre + FRAGMENT);
         typeName.put(MODULE, clzNamePre + MODULE);
         typeName.put(COMPONENT, clzNamePre + COMPONENT);
-
     }
 
     public String getName(String type) {

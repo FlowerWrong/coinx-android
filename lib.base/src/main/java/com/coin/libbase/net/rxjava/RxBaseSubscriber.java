@@ -1,12 +1,8 @@
 package com.coin.libbase.net.rxjava;
 
-import com.google.gson.Gson;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
-import com.coin.libbase.model.ErrorBody;
-import com.coin.libbase.model.ErrorCode;
 import com.coin.libbase.net.ApiStatus;
 import com.coin.libbase.presenter.BasePresenter;
-import com.coin.libbase.utils.ToastUtil;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -49,7 +45,7 @@ public abstract class RxBaseSubscriber<T> {
 //                return;
 //            }
 
-            //空响应体
+            // 空响应体
             if (body == null) {
                 onError(ApiStatus.HTTP_ERROR, UNKNOWN_MSG);
                 return;

@@ -1,19 +1,13 @@
 package com.coin.libbase.utils;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 public class DoubleUtils {
 
     public static String formatTwoDecimalString(double d) {
         return formatDecimalFixed(d, 2);
     }
-
-//    public static String formatFourDecimalString(double d) {
-//        return formatDecimalFixed(d, 4);
-//    }
 
     public static double formatTwoDecimal(double d) {
         return formatDecimal(d, 2);
@@ -73,7 +67,6 @@ public class DoubleUtils {
         System.out.println(formatTwoDecimal(0.00001));
         System.out.println(formatTwoDecimal(0.011));
         System.out.println(formatTwoDecimal(0.015));
-
     }
 
 }

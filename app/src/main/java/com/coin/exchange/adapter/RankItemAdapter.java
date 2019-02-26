@@ -129,7 +129,6 @@ public class RankItemAdapter extends RecyclerView.Adapter {
     }
 
     static class RankItemViewHolder extends RecyclerView.ViewHolder {
-
         @BindView(R.id.tv_rank_num)
         TextView tvRankNum;
         @BindView(R.id.iv_icon)
@@ -154,14 +153,12 @@ public class RankItemAdapter extends RecyclerView.Adapter {
     }
 
     static class TitleViewHolder extends RecyclerView.ViewHolder {
-
         TitleViewHolder(View itemView) {
             super(itemView);
         }
     }
 
     static class DividerViewHolder extends RecyclerView.ViewHolder {
-
         DividerViewHolder(View itemView) {
             super(itemView);
         }

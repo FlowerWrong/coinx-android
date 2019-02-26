@@ -1,12 +1,9 @@
 package com.coin.libbase.net.rxjava;
 
-import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
-import com.coin.libbase.net.ApiStatus;
 import com.coin.libbase.presenter.BasePresenter;
 
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
-import okhttp3.ResponseBody;
 
 public abstract class RxSingleSubscriber<T> extends RxBaseSubscriber<T> implements SingleObserver<T> {
 

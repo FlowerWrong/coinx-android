@@ -2,7 +2,6 @@ package com.coin.exchange.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,7 +15,6 @@ import com.coin.exchange.R;
 import com.coin.exchange.model.okex.vo.PositionItemVO;
 import com.coin.exchange.utils.AppUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;

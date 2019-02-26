@@ -3,7 +3,6 @@ package com.coin.exchange.cache;
 import android.text.TextUtils;
 
 import com.coin.exchange.model.bitMex.BitMEXUserModel;
-import com.coin.exchange.model.okex.OkExUserModel;
 import com.coin.exchange.utils.GsonUtils;
 
 public class BitMexUserCache {

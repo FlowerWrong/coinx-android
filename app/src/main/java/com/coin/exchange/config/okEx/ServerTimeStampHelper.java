@@ -13,9 +13,6 @@ import com.coin.exchange.utils.DateUtils;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLSession;
-
 import okhttp3.Call;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -193,8 +190,6 @@ public class ServerTimeStampHelper {
             case ISO8601:
                 return DateUtils.getISO8601StringViaTimeStamp(result);
             case TIMESTAMP:
-//                return (result / 1000) + "";
-//                return mTimeStampInfoRes.getEpoch().substring(0, 10);
                 return System.currentTimeMillis() / 1000 + "";
             case ISO8601_24:
                 long real_result = result - HOURS_24_DELAY;

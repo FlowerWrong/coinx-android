@@ -61,7 +61,6 @@ public class CheckLoginAspectJ {
         }
 
         return joinPoint.proceed();
-
     }
 
 }

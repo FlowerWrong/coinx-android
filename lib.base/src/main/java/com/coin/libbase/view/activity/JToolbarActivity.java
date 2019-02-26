@@ -26,8 +26,6 @@ import com.coin.libbase.presenter.BasePresenter;
 
 public abstract class JToolbarActivity<T extends BasePresenter> extends JBaseActivity<T> {
 
-//    private final static String TAG = JToolbarActivity.class.getSimpleName();
-
     protected Toolbar mToolbar;
 
     protected TextView mTvTitle;

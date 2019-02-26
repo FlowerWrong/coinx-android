@@ -1,7 +1,6 @@
 package com.coin.exchange.view;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ToggleButton;
@@ -15,7 +14,6 @@ import com.coin.libbase.view.activity.JToolbarActivity;
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author Jiang zinc

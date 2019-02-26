@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.coin.exchange.webSocket.base.listener.BaseWebSocketListener;
 import com.coin.exchange.webSocket.base.listener.IWebSocketListener;
-import com.coin.exchange.webSocket.bitMex.BitMEXWebSocketManager;
 
 import java.util.HashMap;
 import java.util.HashSet;

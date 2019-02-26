@@ -3,10 +3,7 @@ package com.coin.exchange.view.test;
 import android.content.Intent;
 
 import com.coin.exchange.R;
-import com.coin.exchange.utils.AppUtils;
 import com.coin.exchange.view.fragment.trade.delegation.BitMEXDelegationFragment;
-import com.coin.exchange.view.fragment.trade.delegation.DelegationFragment;
-import com.coin.exchange.view.fragment.trade.position.PositionFragment;
 import com.coin.libbase.view.activity.JBaseActivity;
 
 /**

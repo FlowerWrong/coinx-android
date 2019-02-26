@@ -13,6 +13,5 @@ public class JApplication extends Application {
     public void onCreate() {
         super.onCreate();
     }
-
-
+    
 }

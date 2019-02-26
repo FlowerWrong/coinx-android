@@ -120,5 +120,4 @@ public class CollectionItem implements Comparable<CollectionItem> {
         return compare;
     }
 
-
 }

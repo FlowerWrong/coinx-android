@@ -9,7 +9,6 @@ import com.coin.exchange.view.fragment.trade.delegation.DelegationView;
 import com.coin.libbase.net.rxjava.RxObservableSubscriber;
 import com.coin.libbase.presenter.BasePresenter;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

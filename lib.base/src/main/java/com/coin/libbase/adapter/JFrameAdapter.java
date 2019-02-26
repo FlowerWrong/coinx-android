@@ -50,7 +50,6 @@ public class JFrameAdapter extends JRefreshAndLoadMoreAdapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
         if (this.mStateListener == null) {
             super.onBindViewHolder(holder, position);
             return;
@@ -68,11 +67,8 @@ public class JFrameAdapter extends JRefreshAndLoadMoreAdapter {
             });
 
         } else if (holder instanceof LoadingViewHolder) {
-
             this.mStateListener.onLoading();
-
         } else if (holder instanceof EmptyViewHolder) {
-
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -81,11 +77,8 @@ public class JFrameAdapter extends JRefreshAndLoadMoreAdapter {
                     JFrameAdapter.this.mStateListener.onEmpty();
                 }
             });
-
         } else {
-
             super.onBindViewHolder(holder, position);
-
         }
     }
 
@@ -103,13 +96,11 @@ public class JFrameAdapter extends JRefreshAndLoadMoreAdapter {
 
     @Override
     public int getItemViewType(int position) {
-
         if (this.mCurrentType == SUCCESS_TYPE) {
             return super.getItemViewType(position);
         } else {
             return this.mCurrentType;
         }
-
     }
 
     //是否处在loading、retry、empty状态
@@ -138,22 +129,18 @@ public class JFrameAdapter extends JRefreshAndLoadMoreAdapter {
     }
 
     class RetryViewHolder extends RecyclerView.ViewHolder {
-
         public RetryViewHolder(View itemView) {
             super(itemView);
         }
-
     }
 
     class LoadingViewHolder extends RecyclerView.ViewHolder {
-
         public LoadingViewHolder(View itemView) {
             super(itemView);
         }
     }
 
     class EmptyViewHolder extends RecyclerView.ViewHolder {
-
         public EmptyViewHolder(View itemView) {
             super(itemView);
         }

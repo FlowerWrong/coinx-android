@@ -1,7 +1,6 @@
 package com.coin.libbase.utils;
 
 import android.app.Application;
-import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
 

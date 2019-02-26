@@ -1,7 +1,6 @@
 package com.coin.exchange.di.module;
 
 import com.coin.exchange.di.scope.ActivityScope;
-import com.coin.exchange.view.fragment.trade.delegation.DelegationContentView;
 import com.coin.exchange.view.fragment.trade.delegation.DelegationView;
 
 import dagger.Module;

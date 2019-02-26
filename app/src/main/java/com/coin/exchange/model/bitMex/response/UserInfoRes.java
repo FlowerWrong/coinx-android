@@ -2,8 +2,6 @@ package com.coin.exchange.model.bitMex.response;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 /**
  * @author Jiang zinc
  * @date 创建时间：2018/12/17

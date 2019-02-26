@@ -1,26 +1,9 @@
 package com.coin.exchange.view.fragment.trade.position;
 
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.coin.exchange.R;
 import com.coin.exchange.adapter.NumbersAdapter;
-import com.coin.libbase.view.fragment.dialog.JBaseDialogFragment;
 import com.coin.libbase.view.fragment.dialog.JBaseFloatingFragment;
-
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * @author Jiang zinc
@@ -95,7 +78,6 @@ public abstract class PositionInputFragment extends JBaseFloatingFragment
         }
 
         curTextView.setText(content);
-
     }
 
 }

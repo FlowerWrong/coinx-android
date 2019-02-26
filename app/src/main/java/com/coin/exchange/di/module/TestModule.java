@@ -2,7 +2,6 @@ package com.coin.exchange.di.module;
 
 import com.coin.exchange.di.scope.ActivityScope;
 import com.coin.exchange.view.test.TestView;
-import com.coin.libbase.view.IView;
 
 import dagger.Module;
 import dagger.Provides;

@@ -2,7 +2,6 @@ package com.coin.exchange.view.fragment.trade.position;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,6 @@ import com.coin.exchange.R;
 import com.coin.exchange.adapter.NumbersAdapter;
 import com.coin.exchange.utils.AppUtils;
 import com.coin.libbase.utils.ToastUtil;
-import com.coin.libbase.view.fragment.dialog.JBaseDialogFragment;
 
 import butterknife.BindView;
 
