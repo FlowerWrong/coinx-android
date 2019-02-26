@@ -71,8 +71,6 @@ public class MarketPresenter extends BasePresenter<MarketView> {
                     public List<HotCoinItemVO> apply(List<InstrumentItemRes> instrumentItemList) throws Exception {
                         List<HotCoinItemVO> list = new ArrayList<>();
 
-                        boolean isAddBCH = false;
-
                         for (InstrumentItemRes item : instrumentItemList) {
                             if (item.getRootSymbol().equals(XBT) && item.getSymbol().equals(XBTUSD)) {
                                 setData(list, item, XBT_NAME);
@@ -243,7 +241,6 @@ public class MarketPresenter extends BasePresenter<MarketView> {
     }
 
     public void getBitMexRankInfoList() {
-
         RetrofitFactory.getBitMexApiService()
                 .getInstrumentList()
                 .subscribeOn(Schedulers.io())

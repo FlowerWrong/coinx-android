@@ -267,7 +267,7 @@ public class TradeFuturesOptionalFragment extends JBaseFragment {
                         for (int j = 0; j < okex_collectionItems.size(); j++) {
                             if (okex_collectionItems.get(j).getTitle().contains(time)
                                     && okex_collectionItems.get(j).getUrl().contains(icon.toUpperCase())
-                                    && detailRes.getLast() != okex_collectionItems.get(j).getLast()) {  //推送过来的价格和上一次不一样才刷新item
+                                    && detailRes.getLast() != okex_collectionItems.get(j).getLast()) { // 推送过来的价格和上一次不一样才刷新item
                                 okex_collectionItems.get(j).setVolume_24h(detailRes.getVol());
                                 okex_collectionItems.get(j).setLast(detailRes.getLast());
                                 collectionAdapter.notifyItemChanged(j);

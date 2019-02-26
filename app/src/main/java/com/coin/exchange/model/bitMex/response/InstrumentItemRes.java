@@ -11,10 +11,11 @@ import com.google.gson.annotations.SerializedName;
  */
 public class InstrumentItemRes implements Comparable<InstrumentItemRes> {
 
+    // "XRPH19"
     @SerializedName("symbol")
     private String symbol;
 
-    // 合约币种
+    // 合约币种 "XRP"
     @SerializedName("rootSymbol")
     private String rootSymbol;
 

@@ -33,7 +33,6 @@ public class DeleteOptionalFragment extends PositionInputFragment implements Vie
 
     @Override
     protected void initArgs(Bundle arguments) {
-
     }
 
     @Override
@@ -43,7 +42,6 @@ public class DeleteOptionalFragment extends PositionInputFragment implements Vie
 
     @Override
     protected void initView(View view) {
-
     }
 
     @Override
@@ -53,7 +51,6 @@ public class DeleteOptionalFragment extends PositionInputFragment implements Vie
 
     @Override
     public void onClick(String clickNum) {
-
     }
 
     @OnClick({R.id.tv_cancel, R.id.tv_done})

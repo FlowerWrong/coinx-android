@@ -17,7 +17,6 @@ import com.coin.exchange.cache.PreferenceManager;
 import com.coin.exchange.config.FragmentConfig;
 import com.coin.exchange.config.okEx.ChannelHelper;
 import com.coin.exchange.context.AppApplication;
-import com.coin.exchange.database.CollectionItem;
 import com.coin.exchange.database.CollectionModel;
 import com.coin.exchange.model.bitMex.response.InstrumentItemRes;
 import com.coin.exchange.model.okex.response.FuturesInstrumentsTickerList;
@@ -71,8 +70,6 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
     TextView tvKlineCurrency;
     @BindView(R.id.kline_trade_time)
     TextView kline_trade_time;
-    @BindView(R.id.iv_kline_collection)
-    ImageView ivKlineCollection;
     @BindView(R.id.rl_kline_top)
     RelativeLayout rlKlineTop;
     @BindView(R.id.tv_price)
@@ -108,7 +105,7 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
     private KlineTradeAdapter klineTradeAdapter;
 
     private String instrumentId = "";
-    private String insIdCase_3 = "";//合约id前面3位小写
+    private String insIdCase_3 = ""; // 合约id前面3位小写
     private String time = "";
     private String from = "";
 
@@ -127,8 +124,6 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
 
     protected void initView() {
         tvKlineCurrency.setText(insIdCase_3.toUpperCase() + " " + time);
-        AppUtils.isExitAndDelOrAdd(collectionModel, instrumentId,
-                ivKlineCollection, null);
 
         rvOptionalList.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false));
@@ -159,14 +154,9 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
                 .inject(this);
     }
 
-    @OnClick({R.id.iv_kline_back, R.id.iv_kline_collection, R.id.tv_kline_buy, R.id.tv_kline_sell})
+    @OnClick({R.id.iv_kline_back, R.id.tv_kline_buy, R.id.tv_kline_sell})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_kline_collection:
-                CollectionItem collectionItem = new CollectionItem(instrumentId, time);
-                AppUtils.isExitAndDelOrAdd(collectionModel, instrumentId,
-                        ivKlineCollection, collectionItem);
-                break;
             case R.id.tv_kline_buy:
                 ToTradeActivity();
                 break;
