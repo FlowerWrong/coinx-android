@@ -108,7 +108,7 @@ public class FragmentConfig {
     static {
         TRADE_NAV = new ArrayList<>();
         TRADE_NAV.add(new MenuItemVO(0, AppUtils.BITMEX, R.drawable.bitmex_icon));
-        // TRADE_NAV.add(new MenuItemVO(1, AppUtils.OKEX, R.drawable.okex_icon));
+        TRADE_NAV.add(new MenuItemVO(1, AppUtils.OKEX, R.drawable.okex_icon));
     }
 
     public static ArrayList<MenuItemVO> getTradeNav() {

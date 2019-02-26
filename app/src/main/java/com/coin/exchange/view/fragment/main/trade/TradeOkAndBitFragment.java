@@ -118,7 +118,7 @@ public class TradeOkAndBitFragment extends JBaseFragment {
     }
 
     @Subscribe
-    public void onOptional(Event.AddOptionalEvent event) {  // 自选页面点击添加自选后EventBus的实现处
+    public void onOptional(Event.AddOptionalEvent event) { // 自选页面点击添加自选后EventBus的实现处
         mViewPager.setCurrentItem(1); // 全部
         currency = 1;
         tvOkexTradeOptional.setTextColor(getResources().getColor(R.color.sub_text_color));

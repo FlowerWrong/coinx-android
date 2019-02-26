@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,10 +51,12 @@ public class TradeFragment extends JLazyFragment {
 
     @Override
     protected void initView(View view) {
+        Log.i("init view", String.valueOf(mViewPager.getCurrentItem()));
     }
 
     @Override
     protected void initData() {
+        Log.i("init data", String.valueOf(mViewPager.getCurrentItem()));
         final ArrayList<MenuItemVO> tradeNav = FragmentConfig.getTradeNav();
         mViewPager.setNoScroll(false); // 设置是否可以滑动
         mViewPager.setAdapter(new TradePagerAdapter(getChildFragmentManager()) {
