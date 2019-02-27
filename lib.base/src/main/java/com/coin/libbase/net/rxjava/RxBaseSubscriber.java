@@ -33,13 +33,13 @@ public abstract class RxBaseSubscriber<T> {
             ResponseBody body = ((HttpException) e).response().errorBody();
             int code = ((HttpException) e).code();
 
-//            //400-499 的 错误
+//            // 400-499 的 错误
 //            if (code >= 400 && code <= 499) {
 //                onError(ApiStatus.CLIENT_ERROR, SEVER_ERROR_MSG);
 //                return;
 //            }
 //
-//            //500-599 的 错误
+//            // 500-599 的 错误
 //            if (code >= 500 && code <= 505) {
 //                onError(ApiStatus.SERVICE_ERROR, SEVER_ERROR_MSG);
 //                return;
@@ -47,16 +47,16 @@ public abstract class RxBaseSubscriber<T> {
 
             // 空响应体
             if (body == null) {
-                onError(ApiStatus.HTTP_ERROR, UNKNOWN_MSG);
+                onError(ApiStatus.HTTP_ERROR, UNKNOWN_MSG + "空响应体");
                 return;
             }
 
             try {
                 onError(code, body.string());
             } catch (IOException e1) {
+                e1.printStackTrace();
                 onError(ApiStatus.HTTP_ERROR, UNKNOWN_MSG);
             }
-
         } else {
             onError(ApiStatus.UNKNOWN, UNKNOWN_MSG);
         }
