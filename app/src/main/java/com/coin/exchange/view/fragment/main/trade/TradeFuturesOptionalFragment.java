@@ -2,6 +2,8 @@ package com.coin.exchange.view.fragment.main.trade;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -250,33 +252,37 @@ public class TradeFuturesOptionalFragment extends JBaseFragment {
             List<CommonRes> commonResList = list;
             DetailRes detailRes;
             if (from.equals(AppUtils.OKEX)) { // okex
+                // [{"binary":1,"channel":"addChannel","data":{"result":true,"channel":"ok_sub_futureusd_eos_ticker_quarter"}}] 请求数据
+                // https://github.com/okcoin-okex/API-docs-OKEx.com/blob/master/API-For-Spot-CN/%E5%B8%81%E5%B8%81%E4%BA%A4%E6%98%93WebSocket%20API.md#api%E5%8F%82%E8%80%83
                 String channel = commonResList.get(0).getChannel();
-                String icon = channel.substring(17, 20); // 截取币种，如btc
-                String time = "";
-                if (channel.contains("ticker")) {  // 对ticker的推送消息才进行处理
-                    detailRes = (DetailRes) GsonUtils.getInstance().fromJson(
-                            commonResList.get(0).getData().toString(), DetailRes.class);
-                    if (detailRes != null) {
-                        if (channel.contains(ChannelHelper.Y.THIS_WEEK)) {
-                            time = FragmentConfig.WEEK;
-                        } else if (channel.contains(ChannelHelper.Y.NEXT_WEEK)) {
-                            time = FragmentConfig.NEXT_WEEK;
-                        } else if (channel.contains(ChannelHelper.Y.QUARTER)) {
-                            time = FragmentConfig.QUARTER;
-                        }
-                        for (int j = 0; j < okex_collectionItems.size(); j++) {
-                            if (okex_collectionItems.get(j).getTitle().contains(time)
-                                    && okex_collectionItems.get(j).getUrl().contains(icon.toUpperCase())
-                                    && detailRes.getLast() != okex_collectionItems.get(j).getLast()) { // 推送过来的价格和上一次不一样才刷新item
-                                okex_collectionItems.get(j).setVolume_24h(detailRes.getVol());
-                                okex_collectionItems.get(j).setLast(detailRes.getLast());
-                                collectionAdapter.notifyItemChanged(j);
-                                break;
+                if (channel != null && !channel.equals("addChannel")) {
+                    String icon = channel.substring(17, 20); // 截取币种，如btc
+                    String time = "";
+                    if (channel.contains("ticker")) { // 对ticker的推送消息才进行处理
+                        detailRes = (DetailRes) GsonUtils.getInstance().fromJson(
+                                commonResList.get(0).getData().toString(), DetailRes.class);
+                        if (detailRes != null) {
+                            if (channel.contains(ChannelHelper.Y.THIS_WEEK)) {
+                                time = FragmentConfig.WEEK;
+                            } else if (channel.contains(ChannelHelper.Y.NEXT_WEEK)) {
+                                time = FragmentConfig.NEXT_WEEK;
+                            } else if (channel.contains(ChannelHelper.Y.QUARTER)) {
+                                time = FragmentConfig.QUARTER;
+                            }
+                            for (int j = 0; j < okex_collectionItems.size(); j++) {
+                                if (okex_collectionItems.get(j).getTitle().contains(time)
+                                        && okex_collectionItems.get(j).getUrl().contains(icon.toUpperCase())
+                                        && detailRes.getLast() != okex_collectionItems.get(j).getLast()) { // 推送过来的价格和上一次不一样才刷新item
+                                    okex_collectionItems.get(j).setVolume_24h(detailRes.getVol());
+                                    okex_collectionItems.get(j).setLast(detailRes.getLast());
+                                    collectionAdapter.notifyItemChanged(j);
+                                    break;
+                                }
                             }
                         }
                     }
                 }
-            } else if (from.equals(AppUtils.BITMEX)) {  // bitmex
+            } else if (from.equals(AppUtils.BITMEX)) { // bitmex
                 String table = commonResList.get(0).getTable();
                 Object object = commonResList.get(0).getData();
                 if (table == null || object == null) {
@@ -306,7 +312,14 @@ public class TradeFuturesOptionalFragment extends JBaseFragment {
                             if (res.getQuoteCurrency() != null) {
                                 bitmex_collectionItems.get(j).setQuoteCurrency(res.getQuoteCurrency());
                             }
-                            collectionAdapter.notifyItemChanged(j);
+
+                            final int finalJ = j;
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    collectionAdapter.notifyItemChanged(finalJ);
+                                }
+                            });
                             break;
                         }
                     }

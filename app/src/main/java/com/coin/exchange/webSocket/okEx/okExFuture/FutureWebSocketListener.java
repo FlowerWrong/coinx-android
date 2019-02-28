@@ -159,7 +159,7 @@ public class FutureWebSocketListener extends WebSocketListener {
     @Override
     public void onMessage(WebSocket webSocket, String text) {
         super.onMessage(webSocket, text);
-        Log.i(TAG, "onMessage(text)");
+        Log.i(TAG, "onMessage(text): " + text);
         checkSubState(text);
 
         mListener.onMessage(text);
@@ -168,8 +168,8 @@ public class FutureWebSocketListener extends WebSocketListener {
     @Override
     public void onMessage(WebSocket webSocket, ByteString bytes) {
         super.onMessage(webSocket, bytes);
-        Log.i(TAG, "onMessage(bytes)");
         String text = uncompress(bytes.toByteArray());
+        Log.i(TAG, "onMessage(bytes): " + text);
         checkSubState(text);
 
         mListener.onMessage(text);
@@ -209,7 +209,6 @@ public class FutureWebSocketListener extends WebSocketListener {
      * @param req
      */
     public void sendMessage(SubscribeReq req) {
-
         if (req.getEvent().equals(FutureWebSocketManager.REMOVE_CHANNEL)) {
             synchronized (mLockObject) {
                 mRetrySet.remove(req.getChannel());

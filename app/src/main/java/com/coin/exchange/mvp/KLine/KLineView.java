@@ -21,7 +21,7 @@ public interface KLineView extends IView {
 
     void onGetFuturesInstrumentsTradesError(String msg);
 
-    //bitmex
+    // bitmex
     void onGetBitmexInstrument(List<InstrumentItemRes> instrumentItemResList);
 
     void onGetBitmexInstrumentError(String msg);

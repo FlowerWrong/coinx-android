@@ -92,22 +92,27 @@ public class FutureWebSocketManager implements MessageListener {
 
     @Override
     public void onMessage(String text) {
-//        Log.i(TAG, "onMessage: " + text);
+        Log.i(TAG, "onMessage: " + text);
+
+        // {"event":"pong"}
+        if (text.contains("event") && text.contains("pong")) {
+            return;
+        }
 
         try {
             List<CommonRes> jsonListObject = (List<CommonRes>) GsonUtils.getInstance().fromJson(text, new TypeToken<List<CommonRes>>() {
-            }.getType());//把JSON格式的字符串转为List
-            EventBus.getDefault().post(jsonListObject); //  发送消息
+            }.getType()); // 把JSON格式的字符串转为List
+            EventBus.getDefault().post(jsonListObject); // 发送消息
         } catch (Exception e) {
-//            e.printStackTrace();
+            e.printStackTrace();
             try {
                 List<CommonRes> list = new ArrayList<>();
                 CommonRes commonRes = (CommonRes) GsonUtils.getInstance().fromJson(text, new TypeToken<CommonRes>() {
-                }.getType());//把JSON格式的字符串转为List
+                }.getType()); // 把JSON格式的字符串转为List
                 list.add(commonRes);
-                EventBus.getDefault().post(list); //  发送消息
+                EventBus.getDefault().post(list); // 发送消息
             } catch (Exception e1) {
-//                e1.printStackTrace();
+                e1.printStackTrace();
             }
         }
     }

@@ -28,7 +28,6 @@ public abstract class RxObservableSubscriber<T> extends RxBaseSubscriber<T> impl
 
     @Override
     public void onComplete() {
-
     }
 
     /**

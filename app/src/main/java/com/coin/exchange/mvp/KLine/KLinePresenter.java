@@ -1,5 +1,7 @@
 package com.coin.exchange.mvp.KLine;
 
+import android.util.Log;
+
 import com.coin.exchange.config.okEx.ServerTimeStampHelper;
 import com.coin.exchange.model.bitMex.response.InstrumentItemRes;
 import com.coin.exchange.model.okex.response.FuturesInstrumentsTickerList;
@@ -41,6 +43,11 @@ public final class KLinePresenter extends BasePresenter<KLineView> {
                 });
     }
 
+    /**
+     * 获取K线数据
+     * @param instrumentId
+     * @param prise
+     */
     public void getCandles(String instrumentId, final double prise) {
         RetrofitFactory
                 .getOkExApiService()
@@ -49,6 +56,11 @@ public final class KLinePresenter extends BasePresenter<KLineView> {
                 .subscribeOn(io.reactivex.schedulers.Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RxSingleSubscriber<List<List<Double>>>(KLinePresenter.this) {
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("getCandles", e.getMessage()); // FIXME For input string: "2019-02-27T12:16:00.000Z"
+                    }
+
                     @Override
                     protected void onError(int code, String message) {
                         mView.onGetCandlesError(message);

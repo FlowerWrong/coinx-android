@@ -106,14 +106,12 @@ public class ServerTimeStampHelper {
      * @return 获取到这样的格式 2014-11-06T10:34:47.123Z
      */
     public String getCurrentTimeStamp(Type type) {
-
-        //已经初始化
+        // 已经初始化
         if (mIsInit) {
             return getTimeString(type);
         }
 
         synchronized (this) {
-
             if (mIsInit) {
                 return getTimeString(type);
             }

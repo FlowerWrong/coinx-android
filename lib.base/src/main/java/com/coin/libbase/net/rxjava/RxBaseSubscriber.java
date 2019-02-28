@@ -1,5 +1,7 @@
 package com.coin.libbase.net.rxjava;
 
+import android.util.Log;
+
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.coin.libbase.net.ApiStatus;
 import com.coin.libbase.presenter.BasePresenter;
@@ -55,10 +57,15 @@ public abstract class RxBaseSubscriber<T> {
                 onError(code, body.string());
             } catch (IOException e1) {
                 e1.printStackTrace();
-                onError(ApiStatus.HTTP_ERROR, UNKNOWN_MSG);
+                onError(ApiStatus.HTTP_ERROR, UNKNOWN_MSG + "onError");
             }
+        } else if (e instanceof NumberFormatException) {
+            // FIXME
         } else {
-            onError(ApiStatus.UNKNOWN, UNKNOWN_MSG);
+            Log.i("checkThrowable", e.getMessage());
+            Log.i("checkThrowable", e.getLocalizedMessage());
+            Log.i("checkThrowable", e.getStackTrace().toString());
+            onError(ApiStatus.UNKNOWN, UNKNOWN_MSG + e.getMessage());
         }
     }
 

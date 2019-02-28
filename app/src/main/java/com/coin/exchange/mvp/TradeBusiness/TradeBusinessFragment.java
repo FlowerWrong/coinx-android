@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -936,11 +937,16 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
         try {
             List<CommonRes> commonResList = list;
             final FuturesInstrumentsBookRes depthRes;
-            if (from.equals(AppUtils.OKEX)) { //okex
+            if (from.equals(AppUtils.OKEX)) { // okex
                 final FuturesInstrumentsIndexRes indexRes;
                 final DetailRes detailRes;
                 String channel = commonResList.get(0).getChannel();
-                if (channel.contains("depth")) {  //对depth的推送消息才进行处理
+
+                if (channel == null || channel.equals("null")) {
+                    return;
+                }
+
+                if (channel.contains("depth")) { // 对depth的推送消息才进行处理
                     String icon = channel.substring(17, 20); //截取币种，如btc
                     if (insIdCase_3.equals(icon)) {
                         depthRes = (FuturesInstrumentsBookRes) GsonUtils.getInstance().fromJson(
@@ -955,7 +961,7 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
                             });
                         }
                     }
-                } else if (channel.contains("index")) {  //对指数的推送消息才进行处理
+                } else if (channel.contains("index")) { // 对指数的推送消息才进行处理
                     String icon = channel.substring(17, 20); //截取币种，如btc
                     if (insIdCase_3.equals(icon)) {
                         indexRes = (FuturesInstrumentsIndexRes) GsonUtils.getInstance().fromJson(
@@ -970,7 +976,7 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
                             });
                         }
                     }
-                } else if (channel.contains("ticker")) {  //对ticker的推送消息才进行处理
+                } else if (channel.contains("ticker")) { // 对ticker的推送消息才进行处理
                     String icon = channel.substring(17, 20); //截取币种，如btc
                     if (insIdCase_3.equals(icon)) {
                         detailRes = (DetailRes) GsonUtils.getInstance().fromJson(

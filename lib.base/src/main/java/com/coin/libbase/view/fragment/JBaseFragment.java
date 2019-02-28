@@ -364,7 +364,6 @@ public abstract class JBaseFragment<T extends BasePresenter> extends Fragment {
      * 注销一些第三方框架
      */
     private void unregisterLogic() {
-
         // 注册 EventBus
         if (isContain(EVENT_BUS)) {
             EventBus.getDefault().unregister(this);
@@ -373,7 +372,6 @@ public abstract class JBaseFragment<T extends BasePresenter> extends Fragment {
         if (isContain(BUTTER_KNIFE) && unbinder != null) {
             unbinder.unbind();
         }
-
     }
 
     /**
@@ -385,14 +383,6 @@ public abstract class JBaseFragment<T extends BasePresenter> extends Fragment {
     private boolean isContain(int tag) {
         return (getInitRegister() & tag) == tag;
     }
-//
-//    @Subscribe
-//    public void onWebSocket(CommonRes commonRes) {
-//        onMessage(commonRes);
-//    }
-//
-//    protected void onMessage(CommonRes commonRes) {
-//    }
 
     @Subscribe
     public void onWebSocket(List<CommonRes> commonResList) {

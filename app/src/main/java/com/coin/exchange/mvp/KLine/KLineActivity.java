@@ -190,7 +190,9 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
         tvKline24highValue.setText(df.format(futuresInfo.getHigh_24h()));
         tvKline24number.setText(futuresInfo.getVolume_24h() + "");
         tvKline24low.setText(df.format(futuresInfo.getLow_24h()));
-        mPresenter.getCandles(instrumentId, futuresInfo.getLast());
+
+        // 获取k线数据
+        // mPresenter.getCandles(instrumentId, futuresInfo.getLast());
     }
 
     @Override
@@ -286,7 +288,7 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
             List<CommonRes> commonResList = list;
             if (from.equals(AppUtils.OKEX)) {
                 String channel = commonResList.get(0).getChannel();
-                if (channel.contains("trade")) {  // 对trade的推送消息才进行处理
+                if (channel != null && channel.contains("trade")) { // 对trade的推送消息才进行处理
                     String icon = channel.substring(17, 20); // 截取币种，如btc
                     if (insIdCase_3.equals(icon)) {
                         String toJson = GsonUtils.getGson().toJson(commonResList.get(0).getData()); // object 转String

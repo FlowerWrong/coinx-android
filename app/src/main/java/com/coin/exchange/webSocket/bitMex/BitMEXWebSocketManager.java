@@ -51,49 +51,67 @@ public class BitMEXWebSocketManager extends BaseWebSocketManager {
     public void onMessage(String msg) {
         Log.i(TAG, "onMessage[String]: " + msg);
 
+        if ("pong".equals(msg)) {
+            return;
+        }
+
+        // {"info":"Welcome to the BitMEX Realtime API.","version":"2019-02-20T19:35:39.000Z","timestamp":"2019-02-28T05:10:17.441Z","docs":"https://www.bitmex.com/app/wsAPI","limit":{"remaining":39}}
+        if (msg.contains("Welcome to the BitMEX Realtime API") && msg.contains("version")) {
+            return;
+        }
+
+        BitMEXSubscribeRes res = null;
         // 解析订阅 与 取消订阅消息
         try {
-            BitMEXSubscribeRes res = GsonUtils.getGson().fromJson(msg, BitMEXSubscribeRes.class);
-            // 订阅结果
-            boolean result = res.getSuccess();
-            // 订阅信息
-            String subscribeMsg = res.getSubscribe();
-            // 订阅类型[订阅还是取消]
-            String subscribeType = res.getRequest().getOp();
 
-            synchronized (mLock) {
-                if (subscribeType.equals(SUBSCRIBE)) {
-                    // 订阅成功
-                    if (result) {
-                        // 添加至 成功队列中
-                        mSucEvent.add(subscribeMsg);
-                        mRetryEvent.remove(subscribeMsg);
-                        mWaitingEvent.remove(subscribeMsg);
-                    } else {
-                        if (mSucEvent.contains(subscribeMsg)) {
+            // {"success":true,"subscribe":"orderBookL2_25:XBTUSD","request":{"op":"subscribe","args":["orderBookL2_25:XBTUSD"]}}
+            res = GsonUtils.getGson().fromJson(msg, BitMEXSubscribeRes.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (res != null && res.getRequest() != null) {
+            try {
+                // 订阅结果
+                boolean result = res.getSuccess();
+                // 订阅信息
+                String subscribeMsg = res.getSubscribe();
+                // 订阅类型[订阅还是取消]
+                String subscribeType = res.getRequest().getOp();
+
+                synchronized (mLock) {
+                    if (subscribeType.equals(SUBSCRIBE)) {
+                        // 订阅成功
+                        if (result) {
+                            // 添加至 成功队列中
+                            mSucEvent.add(subscribeMsg);
                             mRetryEvent.remove(subscribeMsg);
                             mWaitingEvent.remove(subscribeMsg);
                         } else {
-                            mRetryEvent.add(subscribeMsg);
-                            mWaitingEvent.remove(subscribeMsg);
+                            if (mSucEvent.contains(subscribeMsg)) {
+                                mRetryEvent.remove(subscribeMsg);
+                                mWaitingEvent.remove(subscribeMsg);
+                            } else {
+                                mRetryEvent.add(subscribeMsg);
+                                mWaitingEvent.remove(subscribeMsg);
+                            }
                         }
                     }
                 }
+                return;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            return;
-        } catch (Exception e) {
-//            e.printStackTrace();
         }
 
-        //TODO 需要添加解析的在这里添加
         try {
+            // {"table":"instrument","action":"update","data":[{"symbol":"ETHUSD","lastPriceProtected":136.2,"impactBidPrice":136.12,"impactMidPrice":136.175,"timestamp":"2019-02-28T05:02:17.892Z"}]}
             List<CommonRes> list = new ArrayList<>();
             CommonRes commonRes = (CommonRes) GsonUtils.getInstance().fromJson(msg, new TypeToken<CommonRes>() {
-            }.getType());//把JSON格式的字符串转为List
+            }.getType()); // 把JSON格式的字符串转为List
             list.add(commonRes);
-            EventBus.getDefault().post(list); //  发送消息
+            EventBus.getDefault().post(list); // 发送消息
         } catch (Exception e1) {
-//                e1.printStackTrace();
+            e1.printStackTrace();
         }
     }
 

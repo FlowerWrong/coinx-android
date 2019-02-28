@@ -100,7 +100,6 @@ public class LogInterceptor implements Interceptor {
                                   String url,
                                   long reqTime,
                                   Response response) {
-
         if (!isShow) {
             return;
         }
