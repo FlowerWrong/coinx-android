@@ -76,7 +76,7 @@ public abstract class JBaseActivity<T extends BasePresenter> extends AppCompatAc
         this.mSavedInstanceState = savedInstanceState;
         EXIST_ACTIVITIES.add(this);
 
-        //传NONE，不进行设置视图的layout，可以由子类自行操作
+        // 传NONE，不进行设置视图的layout，可以由子类自行操作
         if (getLayout() != NONE) {
             setContentView(getLayout());
         }
