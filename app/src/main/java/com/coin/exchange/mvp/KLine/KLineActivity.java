@@ -29,6 +29,7 @@ import com.coin.exchange.utils.NumberUtil;
 import com.coin.exchange.view.TradeActivity;
 import com.coin.exchange.webSocket.bitMex.BitMEXWebSocketManager;
 import com.coin.exchange.webSocket.okEx.okExFuture.FutureWebSocketManager;
+import com.coin.libbase.utils.DoubleUtils;
 import com.google.gson.reflect.TypeToken;
 import com.coin.libbase.model.CommonRes;
 import com.coin.libbase.model.eventbus.Event;
@@ -191,6 +192,12 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
         tvKline24number.setText(futuresInfo.getVolume_24h() + "");
         tvKline24low.setText(df.format(futuresInfo.getLow_24h()));
 
+        double mean = (futuresInfo.getHigh_24h() + futuresInfo.getLow_24h()) / 2;
+        double range = (futuresInfo.getLast() - mean) / mean;
+        double p = DoubleUtils.formatTwoDecimal(range * 100);
+
+        setPriceValue(p, futuresInfo.getLast() * range);
+
         // 获取k线数据
         // mPresenter.getCandles(instrumentId, futuresInfo.getLast());
     }
@@ -202,9 +209,6 @@ public final class KLineActivity extends JBaseActivity<KLinePresenter> implement
 
     @Override
     public void onGetCandles(List<List<Double>> lists, double prise) {
-        double spread = prise - lists.get(0).get(1);
-        double p = ((spread) / lists.get(0).get(1)) * 100;
-        setPriceValue(p, spread);
     }
 
     private void setPriceValue(double p, double spread) {

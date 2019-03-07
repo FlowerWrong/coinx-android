@@ -669,21 +669,6 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
 
     @Override
     public void onGetCandles(List<List<Double>> lists, double prise) {
-        if (lists == null || lists.get(0).size() == 0) {
-            return;
-        }
-        double p = (((prise - lists.get(0).get(1))) / lists.get(0).get(1)) * 100;
-        if (p < 0) {
-            tvTradePriseShow.setTextColor(AppUtils.getDecreaseColor());
-            tvTradeKlineShow.setBackground(AppUtils.getDecreaseBg());
-            tvTradeKlineShow.setText("" + df.format(p) + "%");
-            tvTradeUpDownShow.setText("" + df.format(prise - lists.get(0).get(1)));
-        } else {
-            tvTradePriseShow.setTextColor(AppUtils.getIncreaseColor());
-            tvTradeKlineShow.setBackground(AppUtils.getIncreaseBg());
-            tvTradeKlineShow.setText("+" + df.format(p) + "%");
-            tvTradeUpDownShow.setText("+" + df.format(prise - lists.get(0).get(1)));
-        }
     }
 
     @Override
