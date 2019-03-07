@@ -2,7 +2,6 @@ package com.coin.exchange.mvp.MineBind;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +38,6 @@ import butterknife.OnClick;
 
 public final class MineBindFragment extends JBaseFragment<MineBindPresenter> implements MineBindView {
 
-
     private final DecimalFormat df = new DecimalFormat("######0.00");
     private final DecimalFormat df4 = new DecimalFormat("######0.0000");
     private static final String FROM_WHERE = "fromWhere";
@@ -65,10 +63,8 @@ public final class MineBindFragment extends JBaseFragment<MineBindPresenter> imp
     TextView tvBind;
     @BindView(R.id.rl_bind)
     LinearLayout rlBind;
-    private double BTC_USDValue = 1;//okex btc 转换美元
-    private double XBT_USDValue = 1;//bitmex XBT 转换美元
-    //    private double EThValue = 0;
-//    private double BTCValue = 0;
+    private double BTC_USDValue = 1; // okex btc 转换美元
+    private double XBT_USDValue = 1; // bitmex XBT 转换美元
     private double AllBTCValue = 0;
     private double AllValue = 0;
     private double all_equity = 0;
@@ -120,7 +116,8 @@ public final class MineBindFragment extends JBaseFragment<MineBindPresenter> imp
             tvPositionTo.setVisibility(View.VISIBLE);
             tvPositionTo.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.forwad_icon, 0);
             rlBind.setVisibility(View.GONE);
-            mPresenter.getOkexFutures();  //获取所有的合约，然后获取获取比特币兑换美元换的值
+
+            mPresenter.getOkexFutures(); // 获取所有的合约，然后获取获取比特币兑换美元换的值
         } else if (!BitMexUserCache.isEmpty() && from.equals(AppUtils.BITMEX)) {
             tvBindShow.setVisibility(View.VISIBLE);
             tvAssets.setVisibility(View.VISIBLE);
@@ -128,7 +125,8 @@ public final class MineBindFragment extends JBaseFragment<MineBindPresenter> imp
             tvPositionTo.setVisibility(View.VISIBLE);
             tvPositionTo.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.forward_gray, 0);
             rlBind.setVisibility(View.GONE);
-            mPresenter.getBitmexInstrument("XBTUSD"); //获取永续的合约，将XBT转成美元的汇率
+
+            mPresenter.getBitmexInstrument("XBTUSD"); // 获取永续的合约，将XBT转成美元的汇率
         } else {
             tvBindShow.setVisibility(View.GONE);
             tvAssets.setVisibility(View.GONE);
@@ -155,9 +153,9 @@ public final class MineBindFragment extends JBaseFragment<MineBindPresenter> imp
             case R.id.rl_position_to:
                 Intent intentAccount = new Intent();
                 intentAccount.putExtra(FragmentConfig.FROM, from);
-                intentAccount.putExtra("AllValue", df.format(AllValue)); //AccountEquityActivity 一样存在要一起改
-                intentAccount.putExtra("AllBTCValue", df4.format(AllBTCValue)); //AccountEquityActivity 一样存在要一起改
-                intentAccount.putExtra("AccountEquityList", (Serializable) tradesList); //AccountEquityActivity 一样存在要一起改
+                intentAccount.putExtra("AllValue", df.format(AllValue)); // AccountEquityActivity 一样存在要一起改
+                intentAccount.putExtra("AllBTCValue", df4.format(AllBTCValue)); // AccountEquityActivity 一样存在要一起改
+                intentAccount.putExtra("AccountEquityList", (Serializable) tradesList); // AccountEquityActivity 一样存在要一起改
                 intentAccount.setClass(getContext(), AccountEquityActivity.class);
                 startActivity(intentAccount);
                 break;
@@ -188,7 +186,7 @@ public final class MineBindFragment extends JBaseFragment<MineBindPresenter> imp
     public void onGetAssetsValue(List<FuturesAccountsResItem> futuresAccountsResItemList) {
         tradesList.clear();
         tradesList.addAll(futuresAccountsResItemList);
-        mPresenter.getSpotTickerSing(tradesList);//获取币币合约
+        mPresenter.getSpotTickerSing(tradesList); // 获取币币合约
     }
 
     @Override

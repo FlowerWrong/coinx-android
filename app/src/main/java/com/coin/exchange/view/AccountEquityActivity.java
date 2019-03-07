@@ -70,8 +70,8 @@ public class AccountEquityActivity extends JBaseActivity {
     @Override
     protected void initIntent(Intent intent) {
         from = getIntent().getStringExtra(FragmentConfig.FROM);
-        AllValue = getIntent().getStringExtra("AllValue"); //MineBindFragment 一样存在要一起改
-        AllBTCValue = getIntent().getStringExtra("AllBTCValue"); //MineBindFragment 一样存在要一起改
+        AllValue = getIntent().getStringExtra("AllValue"); // MineBindFragment 一样存在要一起改
+        AllBTCValue = getIntent().getStringExtra("AllBTCValue"); // MineBindFragment 一样存在要一起改
         AccountEquityList = (List<FuturesAccountsResItem>) getIntent().getSerializableExtra("AccountEquityList");
         tvTitle.setText("  " + from);
         tvRight.setVisibility(View.VISIBLE);
@@ -118,7 +118,6 @@ public class AccountEquityActivity extends JBaseActivity {
 
     @Override
     protected void initData() {
-
     }
 
 

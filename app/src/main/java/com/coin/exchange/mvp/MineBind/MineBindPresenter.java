@@ -28,7 +28,7 @@ public final class MineBindPresenter extends BasePresenter<MineBindView> {
         super(view);
     }
 
-    //获取所有的合约，然后获取获取比特币兑换美元换的值
+    // 获取所有的合约，然后获取获取比特币兑换美元换的值
     public void getOkexFutures() {
         RetrofitFactory
                 .getOkExApiService()
@@ -40,7 +40,7 @@ public final class MineBindPresenter extends BasePresenter<MineBindView> {
                         Double BTC_USDValue = 1.0;
                         for (int i = 0; i < Tickers.size(); i++) {
                             if (Tickers.get(i).getInstrument_id().contains("BTC-USD")) {
-                                BTC_USDValue = Tickers.get(i).getLast();//获取比特币兑换美元换的值
+                                BTC_USDValue = Tickers.get(i).getLast(); // 获取比特币兑换美元换的值
                                 break;
                             }
                         }
@@ -62,7 +62,7 @@ public final class MineBindPresenter extends BasePresenter<MineBindView> {
                 });
     }
 
-    //获取合约币种资产估值
+    // 获取合约币种资产估值
     public void getAssetsValue() {
         RetrofitFactory
                 .getOkExApiService()
@@ -77,16 +77,16 @@ public final class MineBindPresenter extends BasePresenter<MineBindView> {
                             FuturesAccountsRes.Btc btc = futuresAccountsRes.getInfo().getBtc();
                             FuturesAccountsResItem fartBtc = new FuturesAccountsResItem();
                             fartBtc.setCurrency("BTC");
-                            fartBtc.setAvailable_margin(btc.getTotal_avail_balance());//可用保证金
-                            fartBtc.setAll_equity(btc.getEquity());//总权益
-                            double Realized_pnl = 0; //已实现盈亏
-                            double margin_frozen = 0; //已用保证金
-                            double margin_for_unfilled = 0; //冻结保证金
-                            if (btc.getMargin_mode().equals("crossed")) { //全仓
+                            fartBtc.setAvailable_margin(btc.getTotal_avail_balance()); // 可用保证金
+                            fartBtc.setAll_equity(btc.getEquity()); // 总权益
+                            double Realized_pnl = 0; // 已实现盈亏
+                            double margin_frozen = 0; // 已用保证金
+                            double margin_for_unfilled = 0; // 冻结保证金
+                            if (btc.getMargin_mode().equals("crossed")) { // 全仓
                                 fartBtc.setRealized_margin(NumberUtil.getDouble(btc.getRealized_pnl(), 0.0) + "");
                                 fartBtc.setUsed_margin(NumberUtil.getDouble(btc.getMargin(), 0.0) + "" + "");
-                                fartBtc.setFreezing_deposit(0.0 + "");//全才没有冻结保证金
-                            } else { //逐仓
+                                fartBtc.setFreezing_deposit(0.0 + ""); // 全才没有冻结保证金
+                            } else { // 逐仓
                                 for (int i = 0; i < btc.getContracts().size(); i++) {
                                     Realized_pnl = Realized_pnl + NumberUtil.getDouble(btc.getContracts().get(i).getRealized_pnl(), 0.0);
                                     margin_frozen = margin_frozen + NumberUtil.getDouble(btc.getContracts().get(i).getMargin_frozen(), 0.0);
@@ -104,15 +104,15 @@ public final class MineBindPresenter extends BasePresenter<MineBindView> {
                             fartEth.setCurrency("ETH");
                             fartEth.setAvailable_margin(eth.getTotal_avail_balance());
                             fartEth.setAll_equity(eth.getEquity());
-                            double Realized_pnl = 0; //已实现盈亏
-                            double margin_frozen = 0; //已用保证金
-                            double margin_for_unfilled = 0; //冻结保证金
+                            double Realized_pnl = 0; // 已实现盈亏
+                            double margin_frozen = 0; // 已用保证金
+                            double margin_for_unfilled = 0; // 冻结保证金
 
-                            if (eth.getMargin_mode().equals("crossed")) { //全仓
+                            if (eth.getMargin_mode().equals("crossed")) { // 全仓
                                 fartEth.setRealized_margin(NumberUtil.getDouble(eth.getRealized_pnl(), 0.0) + "");
                                 fartEth.setUsed_margin(NumberUtil.getDouble(eth.getMargin(), 0.0) + "" + "");
-                                fartEth.setFreezing_deposit(0.0 + "");//全才没有冻结保证金
-                            } else { //逐仓
+                                fartEth.setFreezing_deposit(0.0 + ""); // 全才没有冻结保证金
+                            } else { // 逐仓
                                 for (int i = 0; i < eth.getContracts().size(); i++) {
                                     Realized_pnl = Realized_pnl + NumberUtil.getDouble(eth.getContracts().get(i).getRealized_pnl(), 0.0);
                                     margin_frozen = margin_frozen + NumberUtil.getDouble(eth.getContracts().get(i).getMargin_frozen(), 0.0);
@@ -149,7 +149,7 @@ public final class MineBindPresenter extends BasePresenter<MineBindView> {
                 });
     }
 
-    //获取币币合约
+    // 获取币币合约
     public void getSpotTickerSing(final List<FuturesAccountsResItem> tradesList) {
         RetrofitFactory
                 .getOkExApiService()
@@ -184,7 +184,7 @@ public final class MineBindPresenter extends BasePresenter<MineBindView> {
                 });
     }
 
-    //获取bitmex用户钱包
+    // 获取bitmex用户钱包
     public void getBitmexUserMargin() {
         RetrofitFactory
                 .getBitMexApiService()
