@@ -337,6 +337,8 @@ public interface OkExApiService {
      * @param end          选填，结束时间(ISO UTC标准，例如：2018-06-20T02:31:00Z)不填的话写null
      * @param granularity  选填，时间粒度，以秒为单位，如[60/180/300 900/1800/3600/7200/14400/21600/43200/86400/604800]
      * @return 返回值分别为[timestamp(开始时间), open(开盘价格), high(最高价格), low(最低价格), close(收盘价格), volume(交易量 ( 张)),currency_volume(按币种折算的交易量)]
+     *
+     * @doc https://www.okex.com/docs/zh/#spot-line
      */
     @GET("/api/futures/v3/instruments/{instrument_id}/candles")
     Single<List<List<Double>>> getFuturesInstrumentsCandles(@Path("instrument_id") String instrumentId,

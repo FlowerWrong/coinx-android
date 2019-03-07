@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +49,7 @@ import com.coin.exchange.webSocket.bitMex.BitMEXWebSocketManager;
 import com.coin.exchange.webSocket.okEx.okExFuture.FutureWebSocketManager;
 import com.coin.libbase.model.CommonRes;
 import com.coin.libbase.model.eventbus.Event;
+import com.coin.libbase.utils.DoubleUtils;
 import com.coin.libbase.utils.ToastUtil;
 import com.coin.libbase.view.fragment.JBaseFragment;
 import com.google.gson.reflect.TypeToken;
@@ -203,12 +203,10 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
         etNumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
@@ -286,12 +284,12 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
             R.id.tv_clear_number, R.id.et_number, R.id.tv_bullish, R.id.tv_bearish})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tv_trade_optional_show:  //到侧边栏自选
+            case R.id.tv_trade_optional_show: // 到侧边栏自选
                 if (mListener != null) {
                     mListener.onViewClick();
                 }
                 break;
-            case R.id.tv_trade_kline_show:   //到K线图
+            case R.id.tv_trade_kline_show: // 到K线图
                 Intent intent = new Intent();
                 intent.putExtra(FragmentConfig.INSTRUMENT_ID, instrumentId);
                 intent.putExtra(FragmentConfig.TYPE, time);
@@ -299,7 +297,7 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
                 intent.setClass(getContext(), KLineActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.tv_trade_open: //开仓
+            case R.id.tv_trade_open: // 开仓
                 isOpen = true;
                 tvTradeOpen.setBackgroundResource(R.color.trade_blue);
                 tvTradeOpen.setTextColor(getResources().getColor(R.color.white));
@@ -317,7 +315,7 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
                     setBitmexOpenValueShow();
                 }
                 break;
-            case R.id.tv_trade_close:  //平仓
+            case R.id.tv_trade_close: // 平仓
                 isOpen = false;
                 tvTradeOpen.setBackgroundResource(R.drawable.future_trade_bg_cfdeee);
                 tvTradeOpen.setTextColor(getResources().getColor(R.color.time_blue));
@@ -335,7 +333,7 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
                     setBitmexSellOpenValueShow();
                 }
                 break;
-            case R.id.rl_trade_lever: //显示杠杆对话框
+            case R.id.rl_trade_lever: // 显示杠杆对话框
                 loopViewFragment.update(Arrays.asList(PLANETS));
                 loopViewFragment.show(this);
                 break;
@@ -563,7 +561,7 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
         }
     }
 
-    //下单
+    // 下单
     private void futuresOrder(FuturesOrderReq futuresOrderReq) {
         if (futuresOrderReq.getPrice().equals("市场价")) {
             futuresOrderReq.setMatch_price("1");
@@ -573,7 +571,7 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
         } else if (futuresOrderReq.getPrice().equals("卖一价")) {
             futuresOrderReq.setPrice(sellOnePrise + "");
         }
-        mPresenter.futuresOrder(futuresOrderReq);//下单
+        mPresenter.futuresOrder(futuresOrderReq); // 下单
 
     }
 
@@ -598,13 +596,13 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
         unselected2.setTextColor(getResources().getColor(R.color.time_blue));
     }
 
-    //获取委托列表
+    // 获取委托列表
     private void getDelegationList(String insId, String status,
                                    final int from, final String type) {
         if (this.from.equals(AppUtils.OKEX)) {
             mPresenter.getDelegationList(instrumentId, "0", 0, time.substring(0, 2));
         } else {
-            //先获取佣金列表在获取委托列表
+            // 先获取佣金列表在获取委托列表
             mPresenter.getCommissionInfo(instrumentId, "New", 100);
         }
     }
@@ -653,7 +651,7 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
 
     @Override
     public void onGetFuturesInfo(FuturesInstrumentsTickerList futuresInfo) {
-        //发送订阅合约信息，要在的destroy 判断是否应该取消订阅
+        // 发送订阅合约信息，要在的destroy 判断是否应该取消订阅
         FutureWebSocketManager.getInstance().subscribeDetail(insIdCase_3, ChannelHelper.getTime(time));
 
         tvTradePriseShow.setText("$" + df.format(futuresInfo.getLast()));
@@ -661,7 +659,7 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
         buyOnePrise = futuresInfo.getBest_bid();
         sellOnePrise = futuresInfo.getBest_ask();
         last = futuresInfo.getLast();
-        mPresenter.getCandles(instrumentId, last);
+        // mPresenter.getCandles(instrumentId, last);
     }
 
     @Override
@@ -709,7 +707,7 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
     @Override
     public void onGetFuturesBook(FuturesInstrumentsBookRes futuresInstrumentsBookRes) {
         tradeDepthAdapter.updateItems(futuresInstrumentsBookRes);
-        //发送订阅深度数据，要在的destroy 判断是否应该取消订阅
+        // 发送订阅深度数据，要在的destroy 判断是否应该取消订阅
         FutureWebSocketManager.getInstance().subscribeAllDepth(insIdCase_3,
                 ChannelHelper.getTime(time), ChannelHelper.Z1.FIVE);
     }
@@ -733,7 +731,7 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
     @Override
     public void onGetFuturesCurrencyInfo(FuturesAccountsCurrencyRes AccountsCurrencyRes) {
         futuresAccountsCurrencyRes = AccountsCurrencyRes;
-        if (isOpen) {  //开仓
+        if (isOpen) { // 开仓
             setOpenValueShow(futuresAccountsCurrencyRes);
         }
     }
@@ -904,28 +902,28 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
         if (from.equals(AppUtils.OKEX)) {
             int detail = FutureWebSocketManager.detailMap.get(insIdCase_3);
             if (detail == 1) {
-                //发送取消订阅深度数据
+                // 发送取消订阅深度数据
                 FutureWebSocketManager.getInstance().unsubscribeDetail(insIdCase_3, ChannelHelper.getTime(time));
             }
-            //无论是否最后一个都减少一个计数
+            // 无论是否最后一个都减少一个计数
             FutureWebSocketManager.detailMap.put(insIdCase_3, --detail);
 
             int de = FutureWebSocketManager.depthMap.get(insIdCase_3);
             if (de == 1) {
-                //发送取消订阅深度数据
+                // 发送取消订阅深度数据
                 FutureWebSocketManager.getInstance().unsubscribeAllDepth(insIdCase_3,
                         ChannelHelper.getTime(time), ChannelHelper.Z1.FIVE);
 
             }
-            //无论是否最后一个都减少一个计数
+            // 无论是否最后一个都减少一个计数
             FutureWebSocketManager.depthMap.put(insIdCase_3, --de);
 
             int index = FutureWebSocketManager.indexMap.get(insIdCase_3);
             if (index == 1) {
-                //发送取消订阅指数
+                // 发送取消订阅指数
                 FutureWebSocketManager.getInstance().unsubscribeIndex(insIdCase_3);
             }
-            //无论是否最后一个都减少一个计数
+            // 无论是否最后一个都减少一个计数
             FutureWebSocketManager.indexMap.put(insIdCase_3, --index);
         } else {
             BitMEXWebSocketManager.getInstance().unsubscribeOrderBook10(instrumentId);
@@ -947,12 +945,12 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
                 }
 
                 if (channel.contains("depth")) { // 对depth的推送消息才进行处理
-                    String icon = channel.substring(17, 20); //截取币种，如btc
+                    String icon = channel.substring(17, 20); // 截取币种，如btc
                     if (insIdCase_3.equals(icon)) {
                         depthRes = (FuturesInstrumentsBookRes) GsonUtils.getInstance().fromJson(
                                 commonResList.get(0).getData().toString(), FuturesInstrumentsBookRes.class);
                         if (depthRes != null && tradeDepthAdapter != null) {
-                            //返回到主线程刷新数据
+                            // 返回到主线程刷新数据
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -962,12 +960,12 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
                         }
                     }
                 } else if (channel.contains("index")) { // 对指数的推送消息才进行处理
-                    String icon = channel.substring(17, 20); //截取币种，如btc
+                    String icon = channel.substring(17, 20); // 截取币种，如btc
                     if (insIdCase_3.equals(icon)) {
                         indexRes = (FuturesInstrumentsIndexRes) GsonUtils.getInstance().fromJson(
                                 commonResList.get(0).getData().toString(), FuturesInstrumentsIndexRes.class);
                         if (indexRes != null && tvTradeListIndexValue != null) {
-                            //返回到主线程刷新数据
+                            // 返回到主线程刷新数据
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -977,7 +975,7 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
                         }
                     }
                 } else if (channel.contains("ticker")) { // 对ticker的推送消息才进行处理
-                    String icon = channel.substring(17, 20); //截取币种，如btc
+                    String icon = channel.substring(17, 20); // 截取币种，如btc
                     if (insIdCase_3.equals(icon)) {
                         detailRes = (DetailRes) GsonUtils.getInstance().fromJson(
                                 commonResList.get(0).getData().toString(), DetailRes.class);
@@ -989,19 +987,34 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
                                         return;
                                     }
                                     if (!tvTradePriseShow.getText().toString()
-                                            .contains(df.format(detailRes.getLast()))) {  //推送过来的价格和上一次不一样才刷新item
+                                            .contains(df.format(detailRes.getLast()))) { // 推送过来的价格和上一次不一样才刷新item
                                         tvTradePriseShow.setText("$" + df.format(detailRes.getLast()));
                                         buyOnePrise = detailRes.getBuy();
                                         sellOnePrise = detailRes.getSell();
                                         last = detailRes.getLast();
-                                        mPresenter.getCandles(instrumentId, last);
+
+                                        double mean = (detailRes.getHigh() + detailRes.getLow()) / 2;
+                                        double range = (detailRes.getLast() - mean) / mean;
+
+                                        double p = DoubleUtils.formatTwoDecimal(range * 100);
+                                        if (p < 0) {
+                                            tvTradePriseShow.setTextColor(AppUtils.getDecreaseColor());
+                                            tvTradeKlineShow.setBackground(AppUtils.getDecreaseBg());
+                                            tvTradeKlineShow.setText("" + df.format(p) + "%");
+                                        } else {
+                                            tvTradePriseShow.setTextColor(AppUtils.getIncreaseColor());
+                                            tvTradeKlineShow.setBackground(AppUtils.getIncreaseBg());
+                                            tvTradeKlineShow.setText("+" + df.format(p) + "%");
+                                        }
+
+                                        // mPresenter.getCandles(instrumentId, last);
                                     }
                                 }
                             });
                         }
                     }
                 }
-            } else if (from.equals(AppUtils.BITMEX)) {  //bitmex
+            } else if (from.equals(AppUtils.BITMEX)) { // bitmex
                 String table = commonResList.get(0).getTable();
                 Object object = commonResList.get(0).getData();
                 if (table == null || object == null) {
@@ -1016,7 +1029,7 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
                     if (!res.getSymbol().contains(instrumentId)) {
                         return;
                     }
-                    //返回到主线程刷新数据
+                    // 返回到主线程刷新数据
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -1049,7 +1062,7 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
                     BitdepthRes = depthRes;
                     if (instrumentId.equals(depthRes.getSymbol())) {
                         if (depthRes != null && tradeDepthAdapter != null) {
-                            //返回到主线程刷新数据
+                            // 返回到主线程刷新数据
                             getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {

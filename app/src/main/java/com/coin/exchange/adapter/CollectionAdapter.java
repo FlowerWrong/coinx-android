@@ -17,6 +17,7 @@ import com.coin.exchange.model.bitMex.response.InstrumentItemRes;
 import com.coin.exchange.model.okex.response.FuturesInstrumentsTickerList;
 import com.coin.exchange.net.RetrofitFactory;
 import com.coin.exchange.utils.AppUtils;
+import com.coin.libbase.utils.DoubleUtils;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -99,11 +100,21 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Op
         holder.tv_name.setText(currency);
         holder.tv_show_time.setText(collectionItem.getTitle());
 
-        if (collectionItem.getPosition() == 0) {  //0代表okex
-            if (collectionItem.getVolume_24h() != 0) {  //推送回来后这些有数据了不用再去请求了
+        if (collectionItem.getPosition() == 0) {  // 0代表okex
+            if (collectionItem.getVolume_24h() != 0) {  // 推送回来后这些有数据了不用再去请求了
                 holder.tv_memo.setText("24h量:" + collectionItem.getVolume_24h() + "");
                 holder.tv_usa.setText("$" + df.format(collectionItem.getLast()));
                 holder.tv_cny.setText(df.format(collectionItem.getLast() * rate) + "");
+
+                double p = collectionItem.getLastChangePcnt();
+                if (p < 0) {
+                    holder.tv_percentage.setBackground(AppUtils.getDecreaseBg());
+                    holder.tv_percentage.setText("" + df.format(p) + "%");
+                } else {
+                    holder.tv_percentage.setBackground(AppUtils.getIncreaseBg());
+                    holder.tv_percentage.setText("+" + df.format(p) + "%");
+                }
+
                 getFutureCandels(holder, collectionItem.getUrl(), collectionItem.getLast());
             } else {
                 RetrofitFactory
@@ -114,7 +125,6 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Op
                         .subscribe(new SingleObserver<FuturesInstrumentsTickerList>() {
                             @Override
                             public void onSubscribe(Disposable d) {
-
                             }
 
                             @Override
@@ -122,6 +132,19 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Op
                                 holder.tv_memo.setText("24h量:" + futuresInstrumentsTicker.getVolume_24h() + "");
                                 holder.tv_usa.setText("$" + df.format(futuresInstrumentsTicker.getLast()));
                                 holder.tv_cny.setText(df.format(futuresInstrumentsTicker.getLast() * rate) + "");
+
+                                double mean = (futuresInstrumentsTicker.getHigh_24h() + futuresInstrumentsTicker.getLow_24h()) / 2;
+                                double range = (futuresInstrumentsTicker.getLast() - mean) / mean;
+                                futuresInstrumentsTicker.setLastChangePcnt(DoubleUtils.formatTwoDecimal(range * 100));
+                                double p = futuresInstrumentsTicker.getLastChangePcnt();
+                                if (p < 0) {
+                                    holder.tv_percentage.setBackground(AppUtils.getDecreaseBg());
+                                    holder.tv_percentage.setText("" + df.format(p) + "%");
+                                } else {
+                                    holder.tv_percentage.setBackground(AppUtils.getIncreaseBg());
+                                    holder.tv_percentage.setText("+" + df.format(p) + "%");
+                                }
+
                                 getFutureCandels(holder, futuresInstrumentsTicker.getInstrument_id(), futuresInstrumentsTicker.getLast());
                             }
 
@@ -131,8 +154,8 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Op
                             }
                         });
             }
-        } else {  //bitmex
-            if (collectionItem.getLast() != 0) { //表示推送过来的
+        } else { // bitmex
+            if (collectionItem.getLast() != 0) { // 表示推送过来的
                 holder.tv_memo.setText("24h量:" + collectionItem.getVolume_24h() + "");
                 if (collectionItem.getQuoteCurrency().equals("USD")) {
                     holder.tv_usa.setText("$" + df.format(collectionItem.getLast()));
@@ -208,7 +231,6 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Op
                 .subscribe(new SingleObserver<List<List<Double>>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
                     }
 
                     @Override

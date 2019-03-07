@@ -7,11 +7,11 @@ import android.support.annotation.Nullable;
 public class CollectionItem implements Comparable<CollectionItem> {
 
     @NonNull
-    private String mUrl = "";  //合约id
+    private String mUrl = ""; // 合约id
     @NonNull
-    private String mTitle = "";  //合约时间，如当周，次周和季度
+    private String mTitle = ""; // 合约时间，如当周，次周和季度
 
-    private int mPosition = 0;//0代表okex，1代表bitmex
+    private int mPosition = 0; // 0代表okex，1代表bitmex
 
     public int getVolume_24h() {
         return volume_24h;
@@ -57,8 +57,8 @@ public class CollectionItem implements Comparable<CollectionItem> {
         this.lastChangePcnt = lastChangePcnt;
     }
 
-    private double indicativeSettlePrice;//bitmex  指数价格
-    private double lastChangePcnt;//bitmex 百分比
+    private double indicativeSettlePrice; // bitmex  指数价格
+    private double lastChangePcnt; // bitmex 百分比, okex是计算出来的
 
     public CollectionItem() {
     }

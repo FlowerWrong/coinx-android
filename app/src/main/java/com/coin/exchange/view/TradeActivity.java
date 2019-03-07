@@ -51,13 +51,11 @@ public class TradeActivity extends JBaseActivity {
 
     @Override
     protected void initView() {
-
     }
 
     @Override
     protected void initData() {
         final ArrayList<MenuItemVO> tradeActivityNav = FragmentConfig.getTradeActivityNav();
-//        tradeViewPager.setNoScroll(false);//设置是否可以滑动
         tradeViewPager.setAdapter(new TradeActivityPagerAdapter(getSupportFragmentManager()) {
             @Override
             public CharSequence getPageTitle(int position) {
@@ -70,7 +68,7 @@ public class TradeActivity extends JBaseActivity {
                 IndicatorLineUtil.setIndicator(tradeTab, 15, 15);
             }
         });
-        //绑定
+        // 绑定
         tradeTab.setupWithViewPager(tradeViewPager);
         // 设置不会回收的数
         tradeViewPager.setOffscreenPageLimit(tradeActivityNav.size());

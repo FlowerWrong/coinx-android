@@ -31,6 +31,7 @@ import com.coin.exchange.utils.GsonUtils;
 import com.coin.exchange.view.TradeActivity;
 import com.coin.exchange.webSocket.bitMex.BitMEXWebSocketManager;
 import com.coin.exchange.webSocket.okEx.okExFuture.FutureWebSocketManager;
+import com.coin.libbase.utils.DoubleUtils;
 import com.coin.libbase.view.fragment.JBaseFragment;
 import com.google.gson.reflect.TypeToken;
 import com.coin.libbase.model.CommonRes;
@@ -243,7 +244,6 @@ public class TradeFuturesOptionalFragment extends JBaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-//        getOptional();  // TODO 从K线图页面调回来刷新一下
     }
 
     @Override
@@ -275,7 +275,18 @@ public class TradeFuturesOptionalFragment extends JBaseFragment {
                                         && detailRes.getLast() != okex_collectionItems.get(j).getLast()) { // 推送过来的价格和上一次不一样才刷新item
                                     okex_collectionItems.get(j).setVolume_24h(detailRes.getVol());
                                     okex_collectionItems.get(j).setLast(detailRes.getLast());
-                                    collectionAdapter.notifyItemChanged(j);
+
+                                    double mean = (detailRes.getHigh() + detailRes.getLow()) / 2;
+                                    double range = (detailRes.getLast() - mean) / mean;
+                                    okex_collectionItems.get(j).setLastChangePcnt(DoubleUtils.formatTwoDecimal(range * 100));
+
+                                    final int finalJ = j;
+                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            collectionAdapter.notifyItemChanged(finalJ);
+                                        }
+                                    });
                                     break;
                                 }
                             }

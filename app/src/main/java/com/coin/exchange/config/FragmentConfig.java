@@ -31,7 +31,6 @@ public class FragmentConfig {
     public static final String TYPE = "type"; // 表示当周，次周，永续等
     public static final String FROM = "from"; // 来自okex或者bitmex
 
-
     public static final String WEEK = "当周";
     public static final String NEXT_WEEK = "次周";
     public static final String QUARTER = "季度";

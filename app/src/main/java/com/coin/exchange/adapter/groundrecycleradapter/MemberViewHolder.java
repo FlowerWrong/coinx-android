@@ -6,23 +6,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.coin.exchange.R;
-import com.coin.exchange.config.okEx.ServerTimeStampHelper;
 import com.coin.exchange.database.CollectionModel;
 import com.coin.exchange.model.okex.response.FuturesInstrumentsTickerList;
-import com.coin.exchange.net.RetrofitFactory;
 import com.coin.exchange.utils.AppUtils;
 import com.coin.exchange.utils.DateUtils;
+import com.coin.libbase.utils.DoubleUtils;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.List;
 
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-
 
 public class MemberViewHolder extends RecyclerView.ViewHolder {
 
@@ -61,36 +54,19 @@ public class MemberViewHolder extends RecyclerView.ViewHolder {
             tv_cny.setText("¥" + df.format(member.getLast() * rate) + "");
             mTimeView.setText("-" + member.getInstrument_id().substring(
                     member.getInstrument_id().length() - 4, member.getInstrument_id().length()));
-            RetrofitFactory
-                    .getOkExApiService()
-                    .getFuturesInstrumentsCandles(member.getInstrument_id(),
-                            ServerTimeStampHelper.getInstance().getCurrentTimeStamp(
-                                    ServerTimeStampHelper.Type.ISO8601_24), null, "60")
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new SingleObserver<List<List<Double>>>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-                        }
 
-                        @Override
-                        public void onSuccess(List<List<Double>> futuresInstrumentsTickerLists) {
-                            double p = (((member.getLast() - futuresInstrumentsTickerLists.get(0).get(1)))
-                                    / futuresInstrumentsTickerLists.get(0).get(1)) * 100;
-                            if (p < 0) {
-                                tv_percentage.setBackground(AppUtils.getDecreaseBg());
-                                tv_percentage.setText("" + df.format(p) + "%");
-                            } else {
-                                tv_percentage.setBackground(AppUtils.getIncreaseBg());
-                                tv_percentage.setText("+" + df.format(p) + "%");
-                            }
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                        }
-                    });
-        } else {  //bitmex
+            double mean = (member.getHigh_24h() + member.getLow_24h()) / 2;
+            double range = (member.getLast() - mean) / mean;
+            member.setLastChangePcnt(DoubleUtils.formatTwoDecimal(range * 100));
+            double p = member.getLastChangePcnt();
+            if (p < 0) {
+                tv_percentage.setBackground(AppUtils.getDecreaseBg());
+                tv_percentage.setText("" + df.format(p) + "%");
+            } else {
+                tv_percentage.setBackground(AppUtils.getIncreaseBg());
+                tv_percentage.setText("+" + df.format(p) + "%");
+            }
+        } else { // bitmex
             mTimeView.setText("");
             mNameView.setText(DateUtils.forBitMexTime(member.getTimestamp()));
             if (member.getQuoteCurrency().equalsIgnoreCase("USD")) {
