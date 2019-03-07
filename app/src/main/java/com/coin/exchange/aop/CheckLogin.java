@@ -1,7 +1,5 @@
 package com.coin.exchange.aop;
 
-import com.coin.exchange.adapter.MarketAdapter;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
