@@ -986,7 +986,7 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
                                             tvTradePriseShow.setTextColor(AppUtils.getDecreaseColor());
                                             tvTradeKlineShow.setBackground(AppUtils.getDecreaseBg());
                                             tvTradeKlineShow.setText("" + df.format(p) + "%");
-                                            tvTradeUpDownShow.setText("" + df.format(last * p));
+                                            tvTradeUpDownShow.setText("" + df.format(last * range));
                                         } else {
                                             tvTradePriseShow.setTextColor(AppUtils.getIncreaseColor());
                                             tvTradeKlineShow.setBackground(AppUtils.getIncreaseBg());
