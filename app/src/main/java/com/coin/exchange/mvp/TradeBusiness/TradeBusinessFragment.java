@@ -139,14 +139,14 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
     FuturesInstrumentsBookRes BitdepthRes = null;
     private ActionListener mListener;
     private String instrumentId = "";
-    private String insIdCase_3 = ""; //合约id前面3位小写
+    private String insIdCase_3 = ""; // 合约id前面3位小写
     private String time = "";
     private String from = "";
     private TradeDepthAdapter tradeDepthAdapter;
     private DelegationAdapter delegationAdapter;
 
-    private boolean isOpen = true;//是否开仓，true 表示开仓。false 表示平仓
-    private int lever = 10;//杠杆倍数，默认10倍,0代表Bitmex全仓
+    private boolean isOpen = true; // 是否开仓，true 表示开仓。false 表示平仓
+    private int lever = 10; // 杠杆倍数，默认10倍,0代表Bitmex全仓
     private LoopViewFragment loopViewFragment;
     private TradeConfirmFragment tradeConfirmFragment;
     private String[] PLANETS = new String[]{"10×", "20×"};
@@ -1001,10 +1001,12 @@ public final class TradeBusinessFragment extends JBaseFragment<TradeBusinessPres
                                             tvTradePriseShow.setTextColor(AppUtils.getDecreaseColor());
                                             tvTradeKlineShow.setBackground(AppUtils.getDecreaseBg());
                                             tvTradeKlineShow.setText("" + df.format(p) + "%");
+                                            tvTradeUpDownShow.setText("" + df.format(last * p));
                                         } else {
                                             tvTradePriseShow.setTextColor(AppUtils.getIncreaseColor());
                                             tvTradeKlineShow.setBackground(AppUtils.getIncreaseBg());
                                             tvTradeKlineShow.setText("+" + df.format(p) + "%");
+                                            tvTradeUpDownShow.setText("+" + df.format(last * range));
                                         }
 
                                         // mPresenter.getCandles(instrumentId, last);
