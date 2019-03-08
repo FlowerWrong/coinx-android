@@ -93,11 +93,11 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="414dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="178dp"
+                android:layout_width="220dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="10dp"
@@ -165,7 +165,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_clear_prise"
                     android:layout_width="match_parent"
-                    android:layout_height="28dp"
+                    android:layout_height="35dp"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/future_trade_bg_cfdeee">
 
@@ -182,8 +182,8 @@
 
                     <TextView
                         android:id="@+id/tv_clear_prise"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="15dp"
@@ -244,7 +244,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_clear_number"
                     android:layout_width="match_parent"
-                    android:layout_height="28dp"
+                    android:layout_height="35dp"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/future_trade_bg_cfdeee">
 
@@ -261,8 +261,8 @@
 
                     <TextView
                         android:id="@+id/tv_clear_number"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="15dp"

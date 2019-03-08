@@ -57,14 +57,13 @@ public class ActivityTradeFragment extends JBaseFragment {
                         ).replace(R.id.fl_trade_change, tradeOkexFragment)
                         .addToBackStack(null)
                         .commit();
-
             }
         });
         tradeOkexFragment = TradeOkAndBitFragment.newInstance(from + "trade"); // from+"trade"代表下单界面进入的
         tradeOkexFragment.setListener(new TradeOkAndBitFragment.ActionListener() {
             @Override
             public void onViewClick() {
-                ToTradeBusess();
+                ToTradeBusiness();
             }
         });
 
@@ -84,10 +83,10 @@ public class ActivityTradeFragment extends JBaseFragment {
 
     @Subscribe()
     public void restartForIncreaseStyle(Event.HideInstrument event) {
-        ToTradeBusess();
+        ToTradeBusiness();
     }
 
-    private void ToTradeBusess() {
+    private void ToTradeBusiness() {
         getChildFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(
