@@ -4,6 +4,8 @@ import com.coin.exchange.config.NetConfig;
 import com.coin.exchange.net.interceptor.CommonParamsInterceptor;
 import com.coin.exchange.net.interceptor.LogInterceptor;
 
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -39,6 +41,7 @@ public class OkHttpHelper {
             synchronized (BIT_MEX_LOCK) {
                 if (bitMexOkHttpClient == null) {
                     OkHttpClient.Builder okHttpHelper = new OkHttpClient.Builder();
+                    Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(NetConfig.proxyHost, NetConfig.proxyPort));
                     bitMexOkHttpClient = okHttpHelper
                             .connectTimeout(NetConfig.CONNECT_TIME_OUT, TimeUnit.SECONDS)
                             .readTimeout(NetConfig.READ_TIME_OUT, TimeUnit.SECONDS)
@@ -47,6 +50,7 @@ public class OkHttpHelper {
                             .addInterceptor(new LogInterceptor())
                             .pingInterval(4500, TimeUnit.MILLISECONDS)
                             .hostnameVerifier(new SSLUtils.TrustAllHostnameVerifier())
+                            .proxy(proxy)
                             .build();
                 }
             }
@@ -66,6 +70,7 @@ public class OkHttpHelper {
             synchronized (BIT_MEX_WS_LOCK) {
                 if (bitMexWsOkHttpClient == null) {
                     OkHttpClient.Builder okHttpHelper = new OkHttpClient.Builder();
+                    Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(NetConfig.proxyHost, NetConfig.proxyPort));
                     bitMexWsOkHttpClient = okHttpHelper
                             .connectTimeout(NetConfig.CONNECT_TIME_OUT, TimeUnit.SECONDS)
                             .readTimeout(NetConfig.READ_TIME_OUT, TimeUnit.SECONDS)
@@ -73,6 +78,7 @@ public class OkHttpHelper {
                             .addInterceptor(new CommonParamsInterceptor(NetConfig.BIT_MEX_HOST))
                             .addInterceptor(new LogInterceptor())
                             .hostnameVerifier(new SSLUtils.TrustAllHostnameVerifier())
+                            .proxy(proxy)
                             .build();
                 }
             }
@@ -92,6 +98,7 @@ public class OkHttpHelper {
             synchronized (OK_EX_LOCK) {
                 if (okExOkHttpClient == null) {
                     OkHttpClient.Builder okHttpHelper = new OkHttpClient.Builder();
+                    Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(NetConfig.proxyHost, NetConfig.proxyPort));
                     okExOkHttpClient = okHttpHelper
                             .connectTimeout(NetConfig.CONNECT_TIME_OUT, TimeUnit.SECONDS)
                             .readTimeout(NetConfig.READ_TIME_OUT, TimeUnit.SECONDS)
@@ -100,6 +107,7 @@ public class OkHttpHelper {
                             .addInterceptor(new CommonParamsInterceptor(NetConfig.OK_EX_HOST))
                             .addInterceptor(new LogInterceptor())
                             .hostnameVerifier(new SSLUtils.TrustAllHostnameVerifier())
+                            .proxy(proxy)
                             .build();
                 }
             }
@@ -119,6 +127,7 @@ public class OkHttpHelper {
             synchronized (OK_EX_PURE_LOCK) {
                 if (okExPureOkHttpClient == null) {
                     OkHttpClient.Builder okHttpHelper = new OkHttpClient.Builder();
+                    Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(NetConfig.proxyHost, NetConfig.proxyPort));
                     okExPureOkHttpClient = okHttpHelper
                             .connectTimeout(NetConfig.CONNECT_TIME_OUT, TimeUnit.SECONDS)
                             .readTimeout(NetConfig.READ_TIME_OUT, TimeUnit.SECONDS)
@@ -126,6 +135,7 @@ public class OkHttpHelper {
                             .addInterceptor(new CommonParamsInterceptor(NetConfig.OK_EX_HOST))
                             .addInterceptor(new LogInterceptor())
                             .hostnameVerifier(new SSLUtils.TrustAllHostnameVerifier())
+                            .proxy(proxy)
                             .build();
                 }
             }
@@ -145,6 +155,7 @@ public class OkHttpHelper {
             synchronized (OK_EX_LOCK) {
                 if (okExOkHttpClient == null) {
                     OkHttpClient.Builder okHttpHelper = new OkHttpClient.Builder();
+                    Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(NetConfig.proxyHost, NetConfig.proxyPort));
                     okExOkHttpClient = okHttpHelper
                             .connectTimeout(NetConfig.CONNECT_TIME_OUT, TimeUnit.SECONDS)
                             .readTimeout(NetConfig.READ_TIME_OUT, TimeUnit.SECONDS)
@@ -153,6 +164,7 @@ public class OkHttpHelper {
                             .addInterceptor(new CommonParamsInterceptor(NetConfig.OK_EX_FUTURE_WEB_SOCKET_HOST))
                             .addInterceptor(new LogInterceptor())
                             .hostnameVerifier(new SSLUtils.TrustAllHostnameVerifier())
+                            .proxy(proxy)
                             .build();
                 }
             }

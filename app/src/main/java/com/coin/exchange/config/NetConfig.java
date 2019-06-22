@@ -14,6 +14,9 @@ public class NetConfig {
     public static final int READ_TIME_OUT = 30;
     public static final int WRITE_TIME_OUT = 30;
 
+    public static final String proxyHost = "127.0.0.1";
+    public static final int proxyPort = 1080;
+
     public static final boolean isDebug = false;
 //    public static final String BIT_MEX_DEBUG_URL = "https://testnet.bitmex.com/api/v1/";
 //    public static final String BIT_MEX_DEBUG_HOST = "testnet.bitmex.com";

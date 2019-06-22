@@ -27,15 +27,15 @@ public class IPConfig {
     public static String OK_EX_WS_IP;
 
     static {
-//        BIT_MEX_IP_MAP.add("www.bitmex.com");
-//        BIT_MEX_TEST_IP_MAP.add("testnet.bitmex.com");
-//        OK_EX_IP_MAP.add("www.okex.com");
-//        OK_EX_WS_IP_MAP.add("real.okex.com");
+        BIT_MEX_IP_MAP.add("www.bitmex.com");
+        BIT_MEX_TEST_IP_MAP.add("testnet.bitmex.com");
+        OK_EX_IP_MAP.add("www.okex.com");
+        OK_EX_WS_IP_MAP.add("real.okex.com");
 
-        BIT_MEX_IP_MAP.add("52.51.111.111");
-        BIT_MEX_TEST_IP_MAP.add("54.246.160.60");
-        OK_EX_IP_MAP.add("104.19.212.87");
-        OK_EX_WS_IP_MAP.add("149.129.81.70");
+//        BIT_MEX_IP_MAP.add("52.51.111.111");
+//        BIT_MEX_TEST_IP_MAP.add("54.246.160.60");
+//        OK_EX_IP_MAP.add("104.19.212.87");
+//        OK_EX_WS_IP_MAP.add("149.129.81.70");
 
         OK_EX_IP = OK_EX_IP_MAP.get(RANDOM.nextInt(OK_EX_IP_MAP.size()));
         BIT_MEX_IP = BIT_MEX_IP_MAP.get(RANDOM.nextInt(BIT_MEX_IP_MAP.size()));

@@ -49,7 +49,7 @@ public class ServerTimeStampHelper {
     private boolean mIsInit = false;
 
     private Response response;
-//    private Call call;
+    // private Call call;
 
     public static ServerTimeStampHelper getInstance() {
         if (instance == null) {
